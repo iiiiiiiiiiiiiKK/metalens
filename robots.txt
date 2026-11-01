@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iiiiiiiiiiiiiKK.github.io/metalens/sitemap.xml

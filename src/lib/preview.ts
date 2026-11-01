@@ -74,7 +74,9 @@ export function buildPreview(
 
   const cardType =
     platform === 'x'
-      ? (doc.twitter.card.trim() || (image.value ? 'summary_large_image' : 'summary')).toLowerCase()
+      ? (
+          doc.twitter.card.trim() || (image.value ? 'summary_large_image' : 'summary')
+        ).toLowerCase()
       : 'opengraph';
 
   return {
@@ -95,7 +97,11 @@ export function buildPreview(
   };
 }
 
-function sourceName(platform: Platform, kind: 'title' | 'description' | 'image', index: number): string {
+function sourceName(
+  platform: Platform,
+  kind: 'title' | 'description' | 'image',
+  index: number,
+): string {
   if (index < 0) return '';
   const chains: Record<Platform, Record<string, string[]>> = {
     x: {

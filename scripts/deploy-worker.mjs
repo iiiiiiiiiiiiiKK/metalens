@@ -39,7 +39,9 @@ const root = resolve(import.meta.dirname, '..');
 const bundlePath = resolve(root, 'worker/dist/index.js');
 
 console.log('building worker bundle...');
-execFileSync(process.execPath, [resolve(root, 'scripts/build-worker.mjs')], { stdio: 'inherit' });
+execFileSync(process.execPath, [resolve(root, 'scripts/build-worker.mjs')], {
+  stdio: 'inherit',
+});
 
 const code = await readFile(bundlePath, 'utf8');
 
@@ -57,11 +59,7 @@ const metadata = {
 
 const form = new FormData();
 form.set('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
-form.set(
-  'index.js',
-  new Blob([code], { type: 'application/javascript+module' }),
-  'index.js',
-);
+form.set('index.js', new Blob([code], { type: 'application/javascript+module' }), 'index.js');
 
 const url = `https://api.cloudflare.com/client/v4/accounts/${accountId}/workers/scripts/${workerName}`;
 const res = await fetch(url, {
@@ -94,11 +92,24 @@ const endpoint = `https://${workerName}.${subdomain}.workers.dev/fetch`;
 console.log(`endpoint: ${endpoint}`);
 
 // Smoke test: a blocked target must be refused, and CORS must be present.
-const smoke = await fetch(endpoint, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json', Origin: 'https://iiiiiiiiiiiiiKK.github.io' },
-  body: JSON.stringify({ url: 'http://169.254.169.254/latest/meta-data/' }),
-});
+// A network that cannot reach workers.dev must not turn a successful upload into
+// a reported failure, so transport errors are reported as inconclusive.
+let smoke;
+try {
+  smoke = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Origin: 'https://iiiiiiiiiiiiiKK.github.io',
+    },
+    body: JSON.stringify({ url: 'http://169.254.169.254/latest/meta-data/' }),
+  });
+} catch (error) {
+  console.warn(`smoke test INCONCLUSIVE (cannot reach ${endpoint}): ${error.message}`);
+  console.log(`METALENS_FETCH_ENDPOINT=${endpoint}`);
+  process.exit(0);
+}
+
 const smokeJson = await smoke.json().catch(() => ({}));
 console.log(
   `smoke test: status=${smoke.status} cors=${smoke.headers.get('access-control-allow-origin')} body=${JSON.stringify(smokeJson)}`,

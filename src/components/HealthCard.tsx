@@ -76,7 +76,9 @@ export function HealthCard({
           return (
             <div key={g.group} className="min-w-0">
               <div className="flex items-baseline justify-between gap-1">
-                <span className="truncate text-[11px] text-muted">{t(GROUP_LABEL[g.group])}</span>
+                <span className="truncate text-[11px] text-muted">
+                  {t(GROUP_LABEL[g.group])}
+                </span>
                 <span className="tnum shrink-0 text-[11px] font-medium text-fg">{pct}</span>
               </div>
               <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-line">

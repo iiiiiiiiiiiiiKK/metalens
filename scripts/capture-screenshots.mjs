@@ -6,7 +6,7 @@
  * Screenshots are taken from the deployed app with real demo data loaded — no
  * mockups, no compositing.
  */
-import { chromium, devices, webkit } from '@playwright/test';
+import { chromium, devices } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -25,9 +25,9 @@ const save = async (target, name) => {
 
 /** Loads the "messy real-world page" demo so the UI shows real findings. */
 async function inspectSample(page, sampleId = 'messy') {
-  await page.goto(url, { waitUntil: 'networkidle' });
-  await page.getByTestId('theme-toggle').click(); // light -> dark is the default; keep dark
-  await page.getByTestId('theme-toggle').click();
+  // `networkidle` never settles when a preview image is slow or blocked, so wait
+  // for the app's own ready signal instead.
+  await page.goto(url, { waitUntil: 'domcontentloaded' });
   await page.getByRole('tab', { name: /samples|示例/i }).click();
   await page.getByTestId(`load-sample-${sampleId}`).click();
   await page.getByTestId('health-score').waitFor({ state: 'visible' });
@@ -56,7 +56,8 @@ async function inspectSample(page, sampleId = 'messy') {
   await save(page, 'desktop-code.png');
 
   // Hero / empty state
-  await page.goto(url, { waitUntil: 'networkidle' });
+  await page.goto(url, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(600);
   await save(page, 'desktop-empty.png');
 
   await browser.close();
@@ -64,7 +65,10 @@ async function inspectSample(page, sampleId = 'messy') {
 
 // ----------------------------------------------------------------- mobile ---
 {
-  const browser = await webkit.launch();
+  // Chromium with the iPhone descriptor: WebKit cannot reach the public host from
+  // this capture environment, and the WebKit layout itself is verified by the
+  // Playwright iphone-13 project against the same build.
+  const browser = await chromium.launch();
   const page = await browser.newPage({
     ...devices['iPhone 13'],
     colorScheme: 'dark',

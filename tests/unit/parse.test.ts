@@ -156,7 +156,10 @@ describe('duplicate detection', () => {
   it('counts <title> elements', () => {
     const { report } = parseHtml(fixture('duplicates.html'));
     expect(report.titleCount).toBe(2);
-    expect(report.duplicates['title']).toEqual(['Duplicate tags everywhere', 'Second title element']);
+    expect(report.duplicates['title']).toEqual([
+      'Duplicate tags everywhere',
+      'Second title element',
+    ]);
   });
 
   it('does not flag a single occurrence', () => {

@@ -117,7 +117,14 @@ export function analyze(
         params: { len, max: LENGTH_HINTS.title.max, hardMax: LENGTH_HINTS.title.hardMax },
       });
     } else {
-      push({ code: 'title.ok', group: 'basic', key: 'title', value, status: 'ok', params: { len } });
+      push({
+        code: 'title.ok',
+        group: 'basic',
+        key: 'title',
+        value,
+        status: 'ok',
+        params: { len },
+      });
     }
     const p = dupParams('title');
     if (p) {
@@ -161,7 +168,11 @@ export function analyze(
         key: 'description',
         value,
         status: 'warning',
-        params: { len, max: LENGTH_HINTS.description.max, hardMax: LENGTH_HINTS.description.hardMax },
+        params: {
+          len,
+          max: LENGTH_HINTS.description.max,
+          hardMax: LENGTH_HINTS.description.hardMax,
+        },
       });
     } else {
       push({
@@ -264,9 +275,21 @@ export function analyze(
   {
     const value = doc.viewport.trim();
     if (!value) {
-      push({ code: 'viewport.missing', group: 'basic', key: 'viewport', value, status: 'warning' });
+      push({
+        code: 'viewport.missing',
+        group: 'basic',
+        key: 'viewport',
+        value,
+        status: 'warning',
+      });
     } else if (!/width\s*=\s*device-width/i.test(value)) {
-      push({ code: 'viewport.invalid', group: 'basic', key: 'viewport', value, status: 'warning' });
+      push({
+        code: 'viewport.invalid',
+        group: 'basic',
+        key: 'viewport',
+        value,
+        status: 'warning',
+      });
     } else {
       push({ code: 'viewport.ok', group: 'basic', key: 'viewport', value, status: 'ok' });
     }
@@ -276,7 +299,13 @@ export function analyze(
   {
     const value = doc.favicon.trim();
     if (!value) {
-      push({ code: 'favicon.missing', group: 'basic', key: 'favicon', value, status: 'warning' });
+      push({
+        code: 'favicon.missing',
+        group: 'basic',
+        key: 'favicon',
+        value,
+        status: 'warning',
+      });
     } else if (!isAbsoluteHttpUrl(value)) {
       const resolved = resolveUrl(value, doc.sourceUrl);
       push({
@@ -382,7 +411,14 @@ export function analyze(
           params: { value, allowed: ALLOWED_TWITTER_CARDS.join(', ') },
         });
       } else {
-        push({ code: 'twitter.ok', group: 'twitter', key, value, status: 'ok', params: { field: key } });
+        push({
+          code: 'twitter.ok',
+          group: 'twitter',
+          key,
+          value,
+          status: 'ok',
+          params: { field: key },
+        });
       }
       continue;
     }
@@ -390,7 +426,11 @@ export function analyze(
     if (!value) {
       const hasFallback = Boolean(fallbackValue);
       push({
-        code: hasFallback ? 'twitter.fallback' : empties.has(key) ? 'twitter.empty' : 'twitter.missing',
+        code: hasFallback
+          ? 'twitter.fallback'
+          : empties.has(key)
+            ? 'twitter.empty'
+            : 'twitter.missing',
         group: 'twitter',
         key,
         value,
@@ -414,7 +454,14 @@ export function analyze(
       continue;
     }
 
-    push({ code: 'twitter.ok', group: 'twitter', key, value, status: 'ok', params: { field: key } });
+    push({
+      code: 'twitter.ok',
+      group: 'twitter',
+      key,
+      value,
+      status: 'ok',
+      params: { field: key },
+    });
 
     const p = dupParams(key);
     if (p) {

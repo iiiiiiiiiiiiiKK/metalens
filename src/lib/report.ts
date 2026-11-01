@@ -25,8 +25,12 @@ export function buildMarkdownReport(input: ReportInput): string {
   const lines: string[] = [];
   lines.push(`# ${t('report.title')}`);
   lines.push('');
-  lines.push(`- ${t('common.source')}: \`${doc.sourceUrl || t('common.unknown')}\` (${report.mode})`);
-  lines.push(`- ${t('health.score')}: **${health.score}/100** (${t(`health.grade.${health.grade}`)})`);
+  lines.push(
+    `- ${t('common.source')}: \`${doc.sourceUrl || t('common.unknown')}\` (${report.mode})`,
+  );
+  lines.push(
+    `- ${t('health.score')}: **${health.score}/100** (${t(`health.grade.${health.grade}`)})`,
+  );
   lines.push(
     `- ${t('health.summary', {
       ok: health.counts.ok,
@@ -42,7 +46,9 @@ export function buildMarkdownReport(input: ReportInput): string {
   if (issues.length === 0) {
     lines.push(t('health.noProblems'));
   } else {
-    lines.push(`| ${t('common.field')} | ${t('common.status')} | ${t('common.issue')} | ${t('common.value')} |`);
+    lines.push(
+      `| ${t('common.field')} | ${t('common.status')} | ${t('common.issue')} | ${t('common.value')} |`,
+    );
     lines.push('| --- | --- | --- | --- |');
     for (const f of issues) {
       lines.push(

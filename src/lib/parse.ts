@@ -117,7 +117,9 @@ export function parseHtml(html: string, options: ParseOptions = {}): ParseResult
 
   // ---- <html lang> --------------------------------------------------------
   const htmlEl = dom.documentElement;
-  doc.lang = cleanText(htmlEl?.getAttribute('lang') ?? '') || cleanText(htmlEl?.getAttribute('xml:lang') ?? '');
+  doc.lang =
+    cleanText(htmlEl?.getAttribute('lang') ?? '') ||
+    cleanText(htmlEl?.getAttribute('xml:lang') ?? '');
 
   report.foundKeys = Array.from(collector.keys).sort();
 
@@ -144,7 +146,11 @@ export function parseHtml(html: string, options: ParseOptions = {}): ParseResult
 
   // ---- mapped fields ------------------------------------------------------
   for (const field of FIELDS) {
-    if (['title', 'description', 'canonical', 'favicon', 'robots', 'viewport', 'lang'].includes(field.key)) {
+    if (
+      ['title', 'description', 'canonical', 'favicon', 'robots', 'viewport', 'lang'].includes(
+        field.key,
+      )
+    ) {
       continue;
     }
     const canonicalKey = field.key;

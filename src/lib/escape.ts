@@ -27,8 +27,12 @@ export function escapeHtmlText(value: string): string {
  * almost always a mistake.
  */
 export function normalizeAttrValue(value: string): string {
-  return String(value ?? '')
-    .replace(/[\u0000-\u001f\u007f]+/g, ' ')
-    .replace(/[ \t]{2,}/g, ' ')
-    .trim();
+  // Control characters are exactly what we are stripping here.
+  return (
+    String(value ?? '')
+      // eslint-disable-next-line no-control-regex
+      .replace(/[\u0000-\u001f\u007f]+/g, ' ')
+      .replace(/[ \t]{2,}/g, ' ')
+      .trim()
+  );
 }

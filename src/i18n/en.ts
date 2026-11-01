@@ -1,4 +1,4 @@
-﻿const en: Record<string, string> = {
+const en: Record<string, string> = {
   // ------------------------------------------------------------------ app --
   'app.name': 'MetaLens',
   'app.tagline': 'See how your links look before you share.',
@@ -43,7 +43,8 @@
   'error.invalidUrl': 'That is not a valid http(s) URL.',
   'error.cors':
     'The browser blocked the request (almost always CORS — the target site does not allow other origins to read its HTML).',
-  'error.blocked': 'The fetch service refused this target (local, private or reserved address).',
+  'error.blocked':
+    'The fetch service refused this target (local, private or reserved address).',
   'error.httpError': 'The server answered with an error status: {detail}.',
   'error.notHtml': 'That URL did not return an HTML document ({detail}).',
   'error.timeout': 'The request took too long and was cancelled.',
@@ -57,7 +58,8 @@
   'error.action.pasteHelp':
     'Open the page, press Ctrl/Cmd + U to view source, copy everything and paste it in the “Paste HTML” tab. The analysis is identical.',
   'error.action.manual': 'Fill in the meta tags manually',
-  'error.action.manualHelp': 'Use the “Manual” tab to type the values and still get live previews.',
+  'error.action.manualHelp':
+    'Use the “Manual” tab to type the values and still get live previews.',
   'error.action.endpoint': 'Run your own fetch endpoint',
   'error.action.endpointHelp':
     'This repository ships a hardened Cloudflare Worker in worker/. Deploy it and paste its URL in Settings → Fetch endpoint. It refuses private networks, re-validates every redirect, caps size and time.',
@@ -94,7 +96,8 @@
   'health.grade.good': 'Good',
   'health.grade.fair': 'Needs work',
   'health.grade.poor': 'Poor',
-  'health.summary': '{ok} ok · {warning} warnings · {missing} missing · {unverified} unverified',
+  'health.summary':
+    '{ok} ok · {warning} warnings · {missing} missing · {unverified} unverified',
   'health.rules.title': 'How the score is calculated',
   'health.rules.formula':
     'score = round(100 × Σ(weight × status credit) / Σ(weight)). Only weights above zero are counted.',
@@ -118,7 +121,8 @@
   'issue.title.duplicate': 'Found {count} <title> elements; scrapers may pick the wrong one.',
   'issue.description.missing': 'No meta description.',
   'issue.description.empty': 'The meta description is present but empty.',
-  'issue.description.short': 'The description is only {len} characters (advisory minimum {min}).',
+  'issue.description.short':
+    'The description is only {len} characters (advisory minimum {min}).',
   'issue.description.long':
     'The description is {len} characters; feeds usually truncate around {max}. Advisory only.',
   'issue.description.ok': 'The description is {len} characters — a comfortable length.',
@@ -127,7 +131,8 @@
   'issue.canonical.relative':
     'The canonical URL is relative ({resolved}). Sharing tools expect an absolute URL.',
   'issue.canonical.invalid': 'The canonical URL is not a resolvable http(s) URL.',
-  'issue.canonical.mismatch': 'Canonical ({canonical}) differs from the inspected page ({current}).',
+  'issue.canonical.mismatch':
+    'Canonical ({canonical}) differs from the inspected page ({current}).',
   'issue.canonical.ok': 'The canonical URL is absolute and matches the page.',
   'issue.canonical.duplicate': '{count} canonical links found; only the first is used.',
   'issue.lang.missing': 'The <html> element has no lang attribute.',
@@ -139,7 +144,8 @@
   'issue.viewport.invalid': 'The viewport tag does not set width=device-width.',
   'issue.viewport.ok': 'Mobile viewport is configured.',
   'issue.favicon.missing': 'No favicon link.',
-  'issue.favicon.relative': 'The favicon path is relative ({resolved}); some platforms cannot resolve it.',
+  'issue.favicon.relative':
+    'The favicon path is relative ({resolved}); some platforms cannot resolve it.',
   'issue.favicon.invalid': 'The favicon URL cannot be resolved.',
   'issue.favicon.ok': 'Favicon found.',
   'issue.og.missing': '{field} is missing.',
@@ -149,8 +155,7 @@
   'issue.og.duplicate': '{field} appears {count} times: {values}',
   'issue.og.image.relative': '{field} is a relative path and was resolved to {resolved}.',
   'issue.og.url.mismatch': 'og:url ({ogUrl}) differs from the canonical URL ({canonical}).',
-  'issue.twitter.card.invalid':
-    'twitter:card value “{value}” is not one of: {allowed}.',
+  'issue.twitter.card.invalid': 'twitter:card value “{value}” is not one of: {allowed}.',
   'issue.twitter.card.noImage': 'Card type is summary_large_image but no image is available.',
   'issue.twitter.image.relative': '{field} is a relative path and was resolved to {resolved}.',
   'issue.twitter.missing': '{field} is missing.',
@@ -175,7 +180,8 @@
   'fix.field.canonical':
     'Point the canonical link at the one URL you want share cards and search results to use.',
   'fix.field.lang': 'Set the language on the <html> element, e.g. lang="en" or lang="zh-CN".',
-  'fix.field.robots': 'Only use noindex when the page really should stay out of search results.',
+  'fix.field.robots':
+    'Only use noindex when the page really should stay out of search results.',
   'fix.field.viewport':
     'Add <meta name="viewport" content="width=device-width, initial-scale=1" />.',
   'fix.field.favicon': 'Link a square icon (at least 96×96, SVG or PNG) with an absolute URL.',
@@ -195,10 +201,12 @@
   'fix.field.twitter:card':
     'Set twitter:card to summary_large_image for a wide picture, or summary for a small square thumbnail.',
   'fix.field.twitter:title': 'Optional — X falls back to og:title, then <title>.',
-  'fix.field.twitter:description': 'Optional — X falls back to og:description, then the meta description.',
+  'fix.field.twitter:description':
+    'Optional — X falls back to og:description, then the meta description.',
   'fix.field.twitter:image':
     'Add twitter:image (or rely on og:image) with an absolute 1.91:1 image URL.',
-  'fix.field.twitter:site': 'Add twitter:site with your @handle so the card credits the account.',
+  'fix.field.twitter:site':
+    'Add twitter:site with your @handle so the card credits the account.',
   'fix.field.twitter:creator': 'Add twitter:creator with the author @handle.',
 
   // -------------------------------------------------------------- preview --
@@ -222,7 +230,8 @@
   'preview.imageFailedHelp':
     'The URL may be missing, hotlink-protected or blocked by CORS. The card would show a grey placeholder.',
   'preview.fullscreen': 'Open preview details',
-  'preview.note': 'Simulation only — platforms cache aggressively. Re-scrape after changing tags.',
+  'preview.note':
+    'Simulation only — platforms cache aggressively. Re-scrape after changing tags.',
 
   // --------------------------------------------------------------- editor --
   'editor.title': 'Meta editor',

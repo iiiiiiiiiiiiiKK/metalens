@@ -4,10 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { createTranslator, en, hasTranslation, LOCALES, translate, zh } from '../../src/i18n';
 import { FIELDS } from '../../src/lib/fields';
 
-const analysisSource = readFileSync(
-  join(process.cwd(), 'src/lib/analysis.ts'),
-  'utf8',
-);
+const analysisSource = readFileSync(join(process.cwd(), 'src/lib/analysis.ts'), 'utf8');
 
 describe('dictionary integrity', () => {
   it('ships every locale', () => {

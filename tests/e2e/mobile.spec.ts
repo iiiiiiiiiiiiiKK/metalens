@@ -1,4 +1,4 @@
-﻿import { expect, test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 /**
  * Mobile-first acceptance: the layout must never scroll sideways, taps must be
@@ -28,13 +28,16 @@ const overflow = (page: import('@playwright/test').Page) =>
   }));
 
 test.beforeEach(async ({ page }) => {
-  await page.route(/^https:\/\/(?!127\.0\.0\.1|localhost).*\.(png|jpg|jpeg|gif|webp)(\?.*)?$/i, (route) =>
-    route.abort(),
+  await page.route(
+    /^https:\/\/(?!127\.0\.0\.1|localhost).*\.(png|jpg|jpeg|gif|webp)(\?.*)?$/i,
+    (route) => route.abort(),
   );
   await page.goto('/');
 });
 
-test('the author X link sits in the header and points at the right profile', async ({ page }) => {
+test('the author X link sits in the header and points at the right profile', async ({
+  page,
+}) => {
   const link = page.getByTestId('author-x-link');
   await expect(link).toBeVisible();
   await expect(link).toHaveAttribute('href', 'https://x.com/0xkillcoin');
@@ -89,16 +92,19 @@ test('inputs do not trigger iOS zoom (font-size >= 16px)', async ({ page }) => {
   test.skip(!viewport || viewport.width >= 640, 'only applies to phone-sized viewports');
 
   const fontSize = (selector: string) =>
-    page
-      .locator(selector)
-      .evaluate((el) => Number.parseFloat(getComputedStyle(el).fontSize));
+    page.locator(selector).evaluate((el) => Number.parseFloat(getComputedStyle(el).fontSize));
 
   expect(await fontSize('#url-input')).toBeGreaterThanOrEqual(16);
   await page.getByRole('tab', { name: /paste html/i }).click();
   expect(await fontSize('#html-input')).toBeGreaterThanOrEqual(16);
 });
 
-test('the mobile navigation chips are reachable and scroll inside their own row', async ({ page }) => {
+test('the mobile navigation chips are reachable and scroll inside their own row', async ({
+  page,
+}) => {
+  const viewport = page.viewportSize();
+  test.skip(!viewport || viewport.width >= 1024, 'the desktop layout uses the sidebar instead');
+
   await inspect(page);
   const chips = page.getByTestId('mobile-nav');
   await expect(chips).toBeVisible();

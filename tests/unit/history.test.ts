@@ -35,8 +35,22 @@ describe('addHistoryEntry', () => {
   });
 
   it('de-duplicates by URL so re-checking does not pile up', () => {
-    const first = addHistoryEntry([], { url: 'https://a.com', title: 'A', mode: 'url', score: 50, id: '1', now: 1 });
-    const second = addHistoryEntry(first, { url: 'https://a.com', title: 'A', mode: 'url', score: 90, id: '2', now: 2 });
+    const first = addHistoryEntry([], {
+      url: 'https://a.com',
+      title: 'A',
+      mode: 'url',
+      score: 50,
+      id: '1',
+      now: 1,
+    });
+    const second = addHistoryEntry(first, {
+      url: 'https://a.com',
+      title: 'A',
+      mode: 'url',
+      score: 90,
+      id: '2',
+      now: 2,
+    });
     expect(second).toHaveLength(1);
     expect(second[0].id).toBe('2');
     expect(second[0].score).toBe(90);
@@ -44,11 +58,29 @@ describe('addHistoryEntry', () => {
 
   it('keys pasted HTML entries by title instead of the synthetic URL', () => {
     let list: HistoryEntry[] = [];
-    list = addHistoryEntry(list, { url: 'about:html-input', title: 'Page A', mode: 'html', score: 60, now: 1 });
-    list = addHistoryEntry(list, { url: 'about:html-input', title: 'Page B', mode: 'html', score: 60, now: 2 });
+    list = addHistoryEntry(list, {
+      url: 'about:html-input',
+      title: 'Page A',
+      mode: 'html',
+      score: 60,
+      now: 1,
+    });
+    list = addHistoryEntry(list, {
+      url: 'about:html-input',
+      title: 'Page B',
+      mode: 'html',
+      score: 60,
+      now: 2,
+    });
     expect(list).toHaveLength(2);
 
-    list = addHistoryEntry(list, { url: 'about:html-input', title: 'Page A', mode: 'html', score: 90, now: 3 });
+    list = addHistoryEntry(list, {
+      url: 'about:html-input',
+      title: 'Page A',
+      mode: 'html',
+      score: 90,
+      now: 3,
+    });
     expect(list).toHaveLength(2);
     expect(list[0].title).toBe('Page A');
     expect(list[0].score).toBe(90);
@@ -56,8 +88,22 @@ describe('addHistoryEntry', () => {
 
   it('keeps URL-less entries without a title separate', () => {
     let list: HistoryEntry[] = [];
-    list = addHistoryEntry(list, { url: '', title: '', mode: 'manual', score: 10, id: 'a', now: 1 });
-    list = addHistoryEntry(list, { url: '', title: '', mode: 'manual', score: 20, id: 'b', now: 2 });
+    list = addHistoryEntry(list, {
+      url: '',
+      title: '',
+      mode: 'manual',
+      score: 10,
+      id: 'a',
+      now: 1,
+    });
+    list = addHistoryEntry(list, {
+      url: '',
+      title: '',
+      mode: 'manual',
+      score: 20,
+      id: 'b',
+      now: 2,
+    });
     expect(list).toHaveLength(2);
   });
 

@@ -1,4 +1,4 @@
-﻿import { ChevronRight, Settings2 } from 'lucide-react';
+import { ChevronRight, Settings2 } from 'lucide-react';
 import type { Translator } from '../i18n';
 import type { Status } from '../lib/types';
 import { StatusDot } from './ui';

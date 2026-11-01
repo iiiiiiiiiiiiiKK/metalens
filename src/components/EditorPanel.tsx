@@ -46,7 +46,12 @@ export function EditorPanel({
         title={t('editor.title')}
         subtitle={t('editor.subtitle')}
         right={
-          <Button variant="ghost" size="sm" onClick={onReset} disabled={!isDirty && !uploadedImage}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onReset}
+            disabled={!isDirty && !uploadedImage}
+          >
             <RotateCcw size={13} />
             {t('editor.reset')}
           </Button>
@@ -102,7 +107,9 @@ export function EditorPanel({
                           onChange={(e) => onUpdate(field.path, e.target.value)}
                           placeholder={t('editor.fieldEmpty')}
                           className={`w-full resize-y rounded-lg border bg-bg px-2.5 py-1.5 text-[16px] leading-relaxed text-fg placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-accent/25 sm:text-[13px] ${
-                            focusPath === field.path ? 'border-accent ring-1 ring-accent/30' : 'border-line'
+                            focusPath === field.path
+                              ? 'border-accent ring-1 ring-accent/30'
+                              : 'border-line'
                           }`}
                         />
                       ) : (
@@ -115,7 +122,9 @@ export function EditorPanel({
                           placeholder={t('editor.fieldEmpty')}
                           spellCheck={false}
                           className={`h-9 w-full rounded-lg border bg-bg px-2.5 text-[16px] text-fg placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-accent/25 sm:text-[13px] ${
-                            focusPath === field.path ? 'border-accent ring-1 ring-accent/30' : 'border-line'
+                            focusPath === field.path
+                              ? 'border-accent ring-1 ring-accent/30'
+                              : 'border-line'
                           }`}
                         />
                       )}
@@ -131,7 +140,9 @@ export function EditorPanel({
           <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-faint">
             {t('group.image')}
           </h3>
-          <p className="mb-2 text-[11.5px] leading-relaxed text-muted">{t('editor.uploadHelp')}</p>
+          <p className="mb-2 text-[11.5px] leading-relaxed text-muted">
+            {t('editor.uploadHelp')}
+          </p>
           <div className="flex flex-wrap items-center gap-2">
             <input
               ref={fileRef}
@@ -158,7 +169,6 @@ export function EditorPanel({
           </div>
           {uploadedImage ? (
             <div className="mt-2 overflow-hidden rounded-lg border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={uploadedImage} alt="" className="aspect-[1.91/1] w-full object-cover" />
             </div>
           ) : null}

@@ -35,7 +35,9 @@ describe('isAbsoluteHttpUrl', () => {
 describe('normalizeUrlInput', () => {
   it('adds a scheme when it is missing', () => {
     expect(normalizeUrlInput('example.com')).toBe('https://example.com/');
-    expect(normalizeUrlInput('  example.com/blog/post  ')).toBe('https://example.com/blog/post');
+    expect(normalizeUrlInput('  example.com/blog/post  ')).toBe(
+      'https://example.com/blog/post',
+    );
   });
 
   it('keeps an explicit scheme', () => {

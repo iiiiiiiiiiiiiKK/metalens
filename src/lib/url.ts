@@ -26,7 +26,7 @@ export function normalizeUrlInput(input: string): string | null {
   try {
     const u = new URL(withScheme);
     if (!HTTP_PROTOCOLS.has(u.protocol)) return null;
-    if (!u.hostname || !u.hostname.includes('.') && u.hostname !== 'localhost') return null;
+    if (!u.hostname || (!u.hostname.includes('.') && u.hostname !== 'localhost')) return null;
     return u.toString();
   } catch {
     return null;
@@ -105,10 +105,13 @@ function canonicalize(url: string): string {
 
 /** Trims, collapses internal whitespace and strips control characters. */
 export function cleanText(value: string): string {
-  return (value ?? '')
-    .replace(/[\u0000-\u001f\u007f]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  return (
+    (value ?? '')
+      // eslint-disable-next-line no-control-regex
+      .replace(/[\u0000-\u001f\u007f]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+  );
 }
 
 /** Length in user-perceived characters (code points, not UTF-16 units). */

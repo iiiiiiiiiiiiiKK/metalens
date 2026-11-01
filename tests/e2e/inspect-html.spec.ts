@@ -50,8 +50,9 @@ async function pasteHtml(page: import('@playwright/test').Page, html: string) {
 
 test.beforeEach(async ({ page }) => {
   // Keep the suite hermetic: never hit third-party image hosts.
-  await page.route(/^https:\/\/(?!127\.0\.0\.1|localhost).*\.(png|jpg|jpeg|gif|webp)(\?.*)?$/i, (route) =>
-    route.abort(),
+  await page.route(
+    /^https:\/\/(?!127\.0\.0\.1|localhost).*\.(png|jpg|jpeg|gif|webp)(\?.*)?$/i,
+    (route) => route.abort(),
   );
   await page.goto('/');
 });
@@ -98,7 +99,9 @@ test('handles empty and hostile input without crashing', async ({ page }) => {
   await page.getByTestId('inspect-html').click();
 
   await expect(page.getByTestId('health-score')).toBeVisible();
-  expect(await page.evaluate(() => (window as unknown as { xss?: boolean }).xss)).toBeUndefined();
+  expect(
+    await page.evaluate(() => (window as unknown as { xss?: boolean }).xss),
+  ).toBeUndefined();
 
   await page.getByRole('tab', { name: /paste html/i }).click();
   await page.locator('#html-input').fill('');

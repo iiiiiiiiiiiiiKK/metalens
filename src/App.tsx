@@ -1,4 +1,4 @@
-﻿import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Download, ExternalLink, FileJson, ScanEye, Sparkles } from 'lucide-react';
 import { AUTHOR_HANDLE, AUTHOR_URL, Header, REPO_URL } from './components/Header';
 import { UrlBar } from './components/UrlBar';
@@ -53,7 +53,12 @@ export default function App() {
       s.findings.filter((f) => f.group === group && f.status !== 'ok').length;
 
     const items: NavItem[] = [
-      { id: 'results', label: t('nav.results'), count: problemCount, status: problemCount ? 'warning' : 'ok' },
+      {
+        id: 'results',
+        label: t('nav.results'),
+        count: problemCount,
+        status: problemCount ? 'warning' : 'ok',
+      },
     ];
     if (s.findings.length > 0) {
       for (const group of GROUP_STATE_GROUPS) {
@@ -88,9 +93,17 @@ export default function App() {
       };
       const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
       if (kind === 'md') {
-        downloadFile(`metalens-report-${stamp}.md`, buildMarkdownReport(input), 'text/markdown');
+        downloadFile(
+          `metalens-report-${stamp}.md`,
+          buildMarkdownReport(input),
+          'text/markdown',
+        );
       } else {
-        downloadFile(`metalens-report-${stamp}.json`, buildJsonReport(input), 'application/json');
+        downloadFile(
+          `metalens-report-${stamp}.json`,
+          buildJsonReport(input),
+          'application/json',
+        );
       }
       s.notify(t('report.exported'));
     },
@@ -207,11 +220,21 @@ export default function App() {
               />
 
               <div className="flex flex-wrap gap-2 rounded-xl border border-line bg-surface p-2.5">
-                <Button variant="secondary" size="sm" onClick={() => exportReport('md')} className="flex-1">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => exportReport('md')}
+                  className="flex-1"
+                >
                   <Download size={13} />
                   {t('report.markdown')}
                 </Button>
-                <Button variant="secondary" size="sm" onClick={() => exportReport('json')} className="flex-1">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => exportReport('json')}
+                  className="flex-1"
+                >
                   <FileJson size={13} />
                   {t('report.json')}
                 </Button>
@@ -233,12 +256,20 @@ export default function App() {
         onNotify={s.notify}
       />
 
-      {s.toastMessage ? <Toast message={s.toastMessage.message} tone={s.toastMessage.tone} /> : null}
+      {s.toastMessage ? (
+        <Toast message={s.toastMessage.message} tone={s.toastMessage.tone} />
+      ) : null}
     </div>
   );
 }
 
-function Hero({ t, onLoadSample }: { t: (k: string) => string; onLoadSample: (id: string) => void }) {
+function Hero({
+  t,
+  onLoadSample,
+}: {
+  t: (k: string) => string;
+  onLoadSample: (id: string) => void;
+}) {
   return (
     <div className="flex flex-col items-center justify-center rounded-xl border border-line bg-surface px-4 py-10 text-center sm:py-16">
       <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-elevated text-accent">

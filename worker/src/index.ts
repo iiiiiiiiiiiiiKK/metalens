@@ -57,7 +57,14 @@ const BLOCKED_HOSTNAMES = [
   'instance-data',
 ];
 
-const BLOCKED_SUFFIXES = ['.local', '.localhost', '.internal', '.intranet', '.lan', '.home.arpa'];
+const BLOCKED_SUFFIXES = [
+  '.local',
+  '.localhost',
+  '.internal',
+  '.intranet',
+  '.lan',
+  '.home.arpa',
+];
 
 const BLOCKED_IPS = new Set([
   '169.254.169.254', // AWS / GCP / Azure / OpenStack metadata
@@ -282,7 +289,10 @@ function json(body: unknown, status: number, headers: Record<string, string>): R
   });
 }
 
-async function readCapped(res: Response, max: number): Promise<{ text: string; truncated: boolean }> {
+async function readCapped(
+  res: Response,
+  max: number,
+): Promise<{ text: string; truncated: boolean }> {
   const declared = Number(res.headers.get('content-length') ?? '0');
   if (declared > max * 4) {
     return { text: '', truncated: true };

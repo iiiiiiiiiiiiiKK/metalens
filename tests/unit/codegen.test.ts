@@ -82,12 +82,17 @@ describe('generateMetaTags', () => {
       includeViewport: true,
     });
     expect(withAll).toContain('<meta name="robots" content="index, follow" />');
-    expect(withAll).toContain('<meta name="viewport" content="width=device-width, initial-scale=1" />');
+    expect(withAll).toContain(
+      '<meta name="viewport" content="width=device-width, initial-scale=1" />',
+    );
 
     const noTitle = generateMetaTags(doc, { ...DEFAULT_CODEGEN_OPTIONS, includeTitle: false });
     expect(noTitle).not.toContain('<title>');
 
-    const noTwitter = generateMetaTags(doc, { ...DEFAULT_CODEGEN_OPTIONS, includeTwitter: false });
+    const noTwitter = generateMetaTags(doc, {
+      ...DEFAULT_CODEGEN_OPTIONS,
+      includeTwitter: false,
+    });
     expect(noTwitter).not.toContain('twitter:');
   });
 

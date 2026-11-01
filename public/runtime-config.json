@@ -1,4 +1,4 @@
 {
-  "fetchEndpoint": "",
-  "build": "dev"
+  "fetchEndpoint": "https://metalens-fetch.changyuansex.workers.dev/fetch",
+  "build": "github-pages"
 }

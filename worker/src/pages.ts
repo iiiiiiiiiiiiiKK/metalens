@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Cloudflare Pages entry point (advanced mode `_worker.js`).
  *
  * The reference deployment serves the fetch API from the same domain as the
@@ -44,4 +44,3 @@ export default {
     return new Response('Not found', { status: 404 });
   },
 };
-

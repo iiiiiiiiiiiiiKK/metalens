@@ -21,7 +21,9 @@
     "test:e2e": "playwright test",
     "worker:build": "node scripts/build-worker.mjs",
     "deploy:pages": "node scripts/deploy-pages.mjs",
-    "deploy:worker": "node scripts/deploy-worker.mjs"
+    "deploy:worker": "node scripts/deploy-worker.mjs",
+    "verify:prod": "node scripts/verify-production.mjs",
+    "screenshots": "node scripts/capture-screenshots.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.545.0",
@@ -45,6 +47,7 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.1",
     "vite": "^7.1.12",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "wrangler": "^4.156.0"
   }
 }

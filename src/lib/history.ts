@@ -20,7 +20,10 @@ function isEntry(value: unknown): value is HistoryEntry {
 export function loadHistory(): HistoryEntry[] {
   const raw = readJSON<unknown[]>(HISTORY_KEY, []);
   if (!Array.isArray(raw)) return [];
-  return raw.filter(isEntry).sort((a, b) => b.checkedAt - a.checkedAt).slice(0, HISTORY_LIMIT);
+  return raw
+    .filter(isEntry)
+    .sort((a, b) => b.checkedAt - a.checkedAt)
+    .slice(0, HISTORY_LIMIT);
 }
 
 export function saveHistory(entries: HistoryEntry[]): void {
@@ -51,7 +54,10 @@ export interface NewHistoryInput {
  * title when there is no URL (pasted HTML / manual mode), otherwise every
  * pasted snippet would collapse into a single entry.
  */
-export function addHistoryEntry(entries: HistoryEntry[], input: NewHistoryInput): HistoryEntry[] {
+export function addHistoryEntry(
+  entries: HistoryEntry[],
+  input: NewHistoryInput,
+): HistoryEntry[] {
   const now = input.now ?? Date.now();
   const id = input.id ?? `${now}-${Math.random().toString(36).slice(2, 8)}`;
   const entry: HistoryEntry = {

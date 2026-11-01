@@ -1,8 +1,9 @@
-﻿import { expect, test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.route(/^https:\/\/(?!127\.0\.0\.1|localhost).*\.(png|jpg|jpeg|gif|webp)(\?.*)?$/i, (route) =>
-    route.abort(),
+  await page.route(
+    /^https:\/\/(?!127\.0\.0\.1|localhost).*\.(png|jpg|jpeg|gif|webp)(\?.*)?$/i,
+    (route) => route.abort(),
   );
   await page.goto('/');
 });
@@ -50,7 +51,8 @@ test('the theme toggle switches between dark and light and persists', async ({ p
   await expect(html).not.toHaveClass(/dark/);
 });
 
-const settingsButton = (page: import('@playwright/test').Page) => page.getByTestId('open-settings');
+const settingsButton = (page: import('@playwright/test').Page) =>
+  page.getByTestId('open-settings');
 
 test('a fetch endpoint can be configured and is used for URL mode', async ({ page }) => {
   const endpoint = 'https://metalens-fetch.example.workers.dev/fetch';

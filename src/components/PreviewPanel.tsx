@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ImageOff, Info, Link2 } from 'lucide-react';
 import type { Translator } from '../i18n';
 import type { ImageProbe, Platform, PreviewData } from '../lib/types';
@@ -67,7 +67,12 @@ export function PreviewPanel({
 
         {preview ? (
           <div data-testid={`preview-${platform}`} className="pt-1">
-            <ShareCard t={t} preview={preview} probe={probes[preview.imageUrl]} />
+            <ShareCard
+              key={preview.imageUrl}
+              t={t}
+              preview={preview}
+              probe={probes[preview.imageUrl]}
+            />
           </div>
         ) : null}
 
@@ -119,7 +124,6 @@ function ShareCard({
   probe?: ImageProbe;
 }) {
   const [failed, setFailed] = useState(false);
-  useEffect(() => setFailed(false), [preview.imageUrl]);
 
   const showImage =
     preview.variant !== 'none' &&
@@ -141,11 +145,16 @@ function ShareCard({
           <div className="min-w-0 flex-1 p-3">
             <p className="line-clamp-2 text-[14px] font-bold leading-snug">{title}</p>
             {description ? (
-              <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-[#536471]">{description}</p>
+              <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-[#536471]">
+                {description}
+              </p>
             ) : null}
             <p className="mt-1.5 truncate text-[12px] text-[#536471]">{domain}</p>
           </div>
-          <div className="aspect-square w-[30%] max-w-[110px] shrink-0 border-l border-black/5 bg-[#f7f9f9]" data-testid="card-media">
+          <div
+            className="aspect-square w-[30%] max-w-[110px] shrink-0 border-l border-black/5 bg-[#f7f9f9]"
+            data-testid="card-media"
+          >
             {showImage ? (
               <img
                 src={preview.imageUrl}
@@ -182,7 +191,9 @@ function ShareCard({
         <div className="p-3">
           <p className="line-clamp-2 text-[14px] font-bold leading-snug">{title}</p>
           {description ? (
-            <p className="mt-0.5 line-clamp-2 text-[13px] leading-snug text-[#536471]">{description}</p>
+            <p className="mt-0.5 line-clamp-2 text-[13px] leading-snug text-[#536471]">
+              {description}
+            </p>
           ) : null}
           <p className="mt-1.5 flex items-center gap-1 truncate text-[12px] text-[#536471]">
             <Link2 size={11} />
@@ -211,10 +222,14 @@ function ShareCard({
           )}
         </div>
         <div className="bg-[#f0f2f5] px-3 py-2.5">
-          <p className="truncate text-[11px] uppercase tracking-wide text-[#65676b]">{domain}</p>
+          <p className="truncate text-[11px] uppercase tracking-wide text-[#65676b]">
+            {domain}
+          </p>
           <p className="mt-0.5 line-clamp-2 text-[15px] font-semibold leading-snug">{title}</p>
           {description ? (
-            <p className="mt-0.5 line-clamp-1 text-[13px] leading-snug text-[#65676b]">{description}</p>
+            <p className="mt-0.5 line-clamp-1 text-[13px] leading-snug text-[#65676b]">
+              {description}
+            </p>
           ) : null}
         </div>
       </div>
@@ -254,7 +269,9 @@ function ShareCard({
           <div className="min-w-0 flex-1">
             <p className="line-clamp-2 text-[14px] font-medium leading-snug">{title}</p>
             {description ? (
-              <p className="mt-1 line-clamp-1 text-[12px] leading-snug text-[#888]">{description}</p>
+              <p className="mt-1 line-clamp-1 text-[12px] leading-snug text-[#888]">
+                {description}
+              </p>
             ) : null}
             <p className="mt-2 truncate text-[11px] text-[#b2b2b2]">{domain}</p>
           </div>

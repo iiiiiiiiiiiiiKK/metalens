@@ -1,8 +1,13 @@
-﻿import { readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { analyze } from '../../src/lib/analysis';
-import { computeHealth, groupPercent, GRADE_THRESHOLDS, STATUS_VALUE } from '../../src/lib/health';
+import {
+  computeHealth,
+  groupPercent,
+  GRADE_THRESHOLDS,
+  STATUS_VALUE,
+} from '../../src/lib/health';
 import { parseHtml } from '../../src/lib/parse';
 import type { Finding, Status } from '../../src/lib/types';
 
@@ -77,10 +82,7 @@ describe('computeHealth', () => {
   });
 
   it('breaks the score down per group', () => {
-    const health = computeHealth([
-      finding(2, 'ok', 'basic'),
-      finding(2, 'missing', 'og'),
-    ]);
+    const health = computeHealth([finding(2, 'ok', 'basic'), finding(2, 'missing', 'og')]);
     const basic = health.groups.find((g) => g.group === 'basic');
     const og = health.groups.find((g) => g.group === 'og');
     expect(groupPercent(basic!)).toBe(100);

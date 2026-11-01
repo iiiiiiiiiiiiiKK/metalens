@@ -1,5 +1,12 @@
 import { useMemo, useState } from 'react';
-import { AlertTriangle, CheckCircle2, CircleDashed, HelpCircle, Lightbulb, Pencil } from 'lucide-react';
+import {
+  AlertTriangle,
+  CheckCircle2,
+  CircleDashed,
+  HelpCircle,
+  Lightbulb,
+  Pencil,
+} from 'lucide-react';
 import type { Translator } from '../i18n';
 import { hasTranslation } from '../i18n';
 import type { Locale } from '../lib/types';
@@ -46,8 +53,16 @@ export function FindingsList({
   const problemCount = problems(findings).length;
 
   const filterItems: Array<{ value: FindingFilter; label: string; badge?: React.ReactNode }> = [
-    { value: 'all', label: t('status.all'), badge: <span className="tnum text-[10px] text-faint">{findings.length}</span> },
-    { value: 'problems', label: t('nav.results'), badge: <span className="tnum text-[10px] text-faint">{problemCount}</span> },
+    {
+      value: 'all',
+      label: t('status.all'),
+      badge: <span className="tnum text-[10px] text-faint">{findings.length}</span>,
+    },
+    {
+      value: 'problems',
+      label: t('nav.results'),
+      badge: <span className="tnum text-[10px] text-faint">{problemCount}</span>,
+    },
     { value: 'missing', label: t('status.missing') },
     { value: 'warning', label: t('status.warning') },
     { value: 'unverified', label: t('status.unverified') },
@@ -150,7 +165,9 @@ function FindingRow({
               </Button>
             ) : null}
           </div>
-          <p className="mt-0.5 break-words text-[12.5px] leading-relaxed text-muted">{message}</p>
+          <p className="mt-0.5 break-words text-[12.5px] leading-relaxed text-muted">
+            {message}
+          </p>
           {finding.value && finding.status !== 'ok' ? (
             <p className="mt-1 break-all rounded border border-line bg-bg px-1.5 py-1 font-mono text-[11px] leading-relaxed text-faint">
               {finding.value.length > 220 ? `${finding.value.slice(0, 220)}…` : finding.value}

@@ -11,10 +11,9 @@ production-ready markup.
 [![CI](https://github.com/iiiiiiiiiiiiiKK/metalens/actions/workflows/ci.yml/badge.svg)](https://github.com/iiiiiiiiiiiiiKK/metalens/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Live on GitHub Pages](https://img.shields.io/badge/live-GitHub%20Pages-222.svg)](https://iiiiiiiiiiiiiKK.github.io/metalens/)
-[![Mirror on Cloudflare Pages](https://img.shields.io/badge/mirror-Cloudflare%20Pages-f38020.svg)](https://metalens.pages.dev/)
+[![Tests](https://img.shields.io/badge/tests-208%20unit%20%C2%B7%2090%20e2e-brightgreen.svg)](#testing)
 
 [Live demo](https://iiiiiiiiiiiiiKK.github.io/metalens/) ·
-[Mirror](https://metalens.pages.dev/) ·
 [Author on X](https://x.com/0xkillcoin) ·
 [中文说明](README.zh-CN.md)
 
@@ -43,42 +42,43 @@ of the page you inspect.
 
 ## Features
 
-| Area | What it does |
-| --- | --- |
-| **Two input modes** | Paste the page HTML (always works, parsed locally) or supply a URL (fetched via CORS, or through the optional hardened fetch endpoint). |
-| **Full tag extraction** | `<title>`, description, canonical, `lang`, `robots`, `viewport`, favicon, all Open Graph fields, all X Card fields, plus every unmodelled meta tag listed for transparency. |
-| **Diagnostics, not just a score** | Missing, empty, duplicated and malformed fields; relative/invalid URLs; canonical mismatches; length advisories; unknown card types. Each finding carries the actual value and a concrete fix. |
-| **Four platform previews** | X (large / small / no image), Facebook, LinkedIn and a WeChat-style card, each applying that platform's documented fallback chain. |
-| **Live editor** | Edit title, description, canonical, language and every OG / X field; previews and generated code update on every keystroke. Reset returns to the inspected values. |
-| **Image checks** | Probes `og:image` / `twitter:image` for real pixel dimensions. If the image cannot load, MetaLens says "unverified" — it never invents a size. Manual upload previews a local file without uploading it. |
-| **Code generator** | Ordered, HTML-escaped `<meta>` output with per-tag copy, toggleable groups, and `.html` download. |
-| **Reports** | One-click Markdown or JSON export of the findings, the health breakdown and the generated markup. |
-| **History** | The last 25 checks, stored in `localStorage` only, with per-entry delete and a confirmed clear-all. |
-| **Bilingual + theme** | English / 中文 and dark / light, both persisted. Switching language never touches the inspected data. |
-| **Mobile-first** | Single-column layout on phones, horizontally switchable platform tabs, 44px touch targets, 16px inputs (no iOS zoom), safe-area padding, and a hard guarantee of no page-level horizontal scroll. |
+| Area                              | What it does                                                                                                                                                                                             |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Two input modes**               | Paste the page HTML (always works, parsed locally) or supply a URL (fetched via CORS, or through the optional hardened fetch endpoint).                                                                  |
+| **Full tag extraction**           | `<title>`, description, canonical, `lang`, `robots`, `viewport`, favicon, all Open Graph fields, all X Card fields, plus every unmodelled meta tag listed for transparency.                              |
+| **Diagnostics, not just a score** | Missing, empty, duplicated and malformed fields; relative/invalid URLs; canonical mismatches; length advisories; unknown card types. Each finding carries the actual value and a concrete fix.           |
+| **Four platform previews**        | X (large / small / no image), Facebook, LinkedIn and a WeChat-style card, each applying that platform's documented fallback chain.                                                                       |
+| **Live editor**                   | Edit title, description, canonical, language and every OG / X field; previews and generated code update on every keystroke. Reset returns to the inspected values.                                       |
+| **Image checks**                  | Probes `og:image` / `twitter:image` for real pixel dimensions. If the image cannot load, MetaLens says "unverified" — it never invents a size. Manual upload previews a local file without uploading it. |
+| **Code generator**                | Ordered, HTML-escaped `<meta>` output with per-tag copy, toggleable groups, and `.html` download.                                                                                                        |
+| **Reports**                       | One-click Markdown or JSON export of the findings, the health breakdown and the generated markup.                                                                                                        |
+| **History**                       | The last 25 checks, stored in `localStorage` only, with per-entry delete and a confirmed clear-all.                                                                                                      |
+| **Bilingual + theme**             | English / 中文 and dark / light, both persisted. Switching language never touches the inspected data.                                                                                                    |
+| **Mobile-first**                  | Single-column layout on phones, horizontally switchable platform tabs, 44px touch targets, 16px inputs (no iOS zoom), safe-area padding, and a hard guarantee of no page-level horizontal scroll.        |
 
 ## Screenshots
 
-| Findings | Generated markup |
-| --- | --- |
+| Findings                                           | Generated markup                           |
+| -------------------------------------------------- | ------------------------------------------ |
 | ![Findings](docs/screenshots/desktop-findings.png) | ![Code](docs/screenshots/desktop-code.png) |
 
-| iPhone — preview | iPhone — findings |
-| --- | --- |
+| iPhone — preview                                       | iPhone — findings                                        |
+| ------------------------------------------------------ | -------------------------------------------------------- |
 | ![Mobile preview](docs/screenshots/mobile-preview.png) | ![Mobile findings](docs/screenshots/mobile-findings.png) |
 
-All screenshots are captured from the deployed build by
-`scripts/capture-screenshots.mjs` (Chromium at 1440×900 @2x, WebKit with an
-iPhone 13 descriptor). No mockups.
+All screenshots are captured from the deployed GitHub Pages build by
+`scripts/capture-screenshots.mjs` (Chromium at 1440×900 @2x, and Chromium with the
+iPhone 13 device descriptor for the phone shots; the WebKit iPhone layout is
+verified separately by the `iphone-13` Playwright project). No mockups.
 
 ## Try it in ten seconds
 
 1. Open the [live demo](https://iiiiiiiiiiiiiKK.github.io/metalens/).
 2. Click **Samples → Complete meta tags**. Three built-in demo documents are
    available, all clearly labelled as demo data:
-   - *Complete meta tags* — the happy path, nothing to fix.
-   - *Classic tags only* — a page with no Open Graph and no X Cards.
-   - *Messy real-world page* — duplicate titles, relative image paths, `noindex`,
+   - _Complete meta tags_ — the happy path, nothing to fix.
+   - _Classic tags only_ — a page with no Open Graph and no X Cards.
+   - _Messy real-world page_ — duplicate titles, relative image paths, `noindex`,
      an invalid card type and over-long copy.
 3. Switch the preview between X, Facebook, LinkedIn and WeChat.
 4. Edit `og:title` in the editor and watch the cards and the markup change.
@@ -108,18 +108,18 @@ iPhone 13 descriptor). No mockups.
   exhaustively without a browser.
 - **Previews are derived, not hard-coded.** Each platform has an explicit
   fallback chain (`twitter:title → og:title → <title>`, and so on) and the UI
-  shows *which* tag supplied each visible value.
+  shows _which_ tag supplied each visible value.
 - **No state library.** A single `useInspector` hook owns the document, probes,
   history and preferences.
 
 ### What gets checked
 
-| Group | Fields |
-| --- | --- |
-| Basics | `title`, `description`, `canonical`, `lang`, `robots`, `viewport`, favicon |
-| Open Graph | `og:title`, `og:description`, `og:image`, `og:image:alt`, `og:url`, `og:type`, `og:site_name`, `og:locale` |
-| X Cards | `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`, `twitter:site`, `twitter:creator` |
-| Images | absolute-URL check, real dimensions, aspect ratio, and an explicit "unverified" state when the image cannot be loaded |
+| Group      | Fields                                                                                                                |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| Basics     | `title`, `description`, `canonical`, `lang`, `robots`, `viewport`, favicon                                            |
+| Open Graph | `og:title`, `og:description`, `og:image`, `og:image:alt`, `og:url`, `og:type`, `og:site_name`, `og:locale`            |
+| X Cards    | `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`, `twitter:site`, `twitter:creator`            |
+| Images     | absolute-URL check, real dimensions, aspect ratio, and an explicit "unverified" state when the image cannot be loaded |
 
 Per field MetaLens reports the actual value, one of four statuses
 (**OK / Missing / Warning / Unverified**), the specific problem, and a concrete
@@ -154,29 +154,29 @@ npm run dev        # http://127.0.0.1:5173
 
 Requirements: Node.js ≥ 20.19. No environment variables are required.
 
-| Script | Purpose |
-| --- | --- |
-| `npm run dev` | Vite dev server |
-| `npm run build` | Typecheck + production build into `dist/` |
-| `npm run preview` | Serve the production build |
-| `npm run typecheck` | `tsc --noEmit` |
-| `npm run lint` | ESLint (flat config, typescript-eslint + react-hooks) |
-| `npm run format` | Prettier check (`format:write` to fix) |
-| `npm test` | Vitest unit suite |
-| `npm run test:e2e` | Playwright: desktop Chromium + iPhone 13 (WebKit) + iPhone SE 320px |
-| `npm run worker:build` | Bundle the fetch endpoint |
+| Script                 | Purpose                                                             |
+| ---------------------- | ------------------------------------------------------------------- |
+| `npm run dev`          | Vite dev server                                                     |
+| `npm run build`        | Typecheck + production build into `dist/`                           |
+| `npm run preview`      | Serve the production build                                          |
+| `npm run typecheck`    | `tsc --noEmit`                                                      |
+| `npm run lint`         | ESLint (flat config, typescript-eslint + react-hooks)               |
+| `npm run format`       | Prettier check (`format:write` to fix)                              |
+| `npm test`             | Vitest unit suite                                                   |
+| `npm run test:e2e`     | Playwright: desktop Chromium + iPhone 13 (WebKit) + iPhone SE 320px |
+| `npm run worker:build` | Bundle the fetch endpoint                                           |
 
 ### Environment variables
 
 See [`.env.example`](.env.example). The app needs none; they only affect builds
 and deployments.
 
-| Name | Used by | Meaning |
-| --- | --- | --- |
-| `VITE_BASE_PATH` | build | `/` for a root domain, `/metalens/` for a GitHub Pages project page. |
-| `VITE_FETCH_ENDPOINT` | optional | Default fetch endpoint baked into `public/runtime-config.json`. Can also be set at runtime in **Settings**. |
-| `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | deployment scripts | Cloudflare upload credentials. Never committed. |
-| `PAGES_PROJECT` | `npm run deploy:pages` | Cloudflare Pages project name (default `metalens`). |
+| Name                                            | Used by                | Meaning                                                                                                     |
+| ----------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `VITE_BASE_PATH`                                | build                  | `/` for a root domain, `/metalens/` for a GitHub Pages project page.                                        |
+| `VITE_FETCH_ENDPOINT`                           | optional               | Default fetch endpoint baked into `public/runtime-config.json`. Can also be set at runtime in **Settings**. |
+| `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | deployment scripts     | Cloudflare upload credentials. Never committed.                                                             |
+| `PAGES_PROJECT`                                 | `npm run deploy:pages` | Cloudflare Pages project name (default `metalens`).                                                         |
 
 ## Testing
 
@@ -196,42 +196,72 @@ code lacks an English or Chinese translation, so a new check cannot ship
 untranslated.
 
 **End-to-end — Playwright.** 31 scenarios, each run on three profiles
-(`chromium-desktop` 1440×900, `iphone-13` WebKit, `iphone-se` 320px) = 93 runs:
-paste HTML → inspect, duplicate/invalid detection, honest CORS failure with
-fallback actions, editor → live preview updates, platform switching, variant
-switching, reset, copy-to-clipboard, Markdown/JSON export, history
-save/delete/clear/persistence, language switching without data loss, theme
-persistence, endpoint settings validation, and mobile checks (no horizontal
-overflow at 320px, ≥44px touch targets, ≥16px inputs, contained nav scrolling).
+(`chromium-desktop` 1440×900, `iphone-13` WebKit, `iphone-se` 320px) = 93 runs;
+together with the production smoke test this covers: paste HTML → inspect,
+duplicate/invalid detection, honest CORS failure with fallback actions, editor →
+live preview updates, platform switching, variant switching, reset,
+copy-to-clipboard, Markdown/JSON export, history save/delete/clear/persistence,
+language switching without data loss, theme persistence, endpoint settings
+validation, and mobile checks (no horizontal overflow at 320px, ≥44px touch
+targets, ≥16px inputs, contained nav scrolling).
 
 ## Deployment
 
-### GitHub Pages (primary)
+### GitHub Pages (live)
 
-Live: **https://iiiiiiiiiiiiiKK.github.io/metalens/**
+**https://iiiiiiiiiiiiiKK.github.io/metalens/** — this is the reference
+deployment, verified end to end (see below).
 
 `.github/workflows/deploy.yml` builds with `VITE_BASE_PATH=/metalens/` and
-publishes `dist/` to the `gh-pages` branch on every push to `main`. Enable it
-once under **Settings → Pages → Build and deployment → Deploy from a branch →
+publishes `dist/` to the `gh-pages` branch on every push to `main`. Enable it once
+under **Settings → Pages → Build and deployment → Deploy from a branch →
 `gh-pages` / root**.
 
-### Cloudflare Pages (mirror + fetch API)
+### Verification of the live site
 
-Live: **https://metalens.pages.dev/** — fetch API: **`/api/fetch`**
+`scripts/verify-production.mjs` runs a real browser against the deployed URL:
+
+```bash
+node scripts/verify-production.mjs --url=https://iiiiiiiiiiiiiKK.github.io/metalens/
+```
+
+Latest run — **13/13 passed**:
+
+| Check                                   | Result                                                                |
+| --------------------------------------- | --------------------------------------------------------------------- |
+| Page responds 200 with the app shell    | status 200                                                            |
+| CSP delivered with the document         | `default-src 'self'` present                                          |
+| Author 𝕏 link in the header             | `href`, `target="_blank"`, `rel="noopener"`, inside the sticky header |
+| Runtime config loads the fetch endpoint | endpoint URL resolved from `runtime-config.json`                      |
+| Paste HTML → findings, health, markup   | score computed, escaped `<meta>` generated                            |
+| `og:image` actually probed              | real `1200×630` measured from the deployed asset                      |
+| Platform previews switch                | X / Facebook / LinkedIn / WeChat all render                           |
+| Editor edits reach the preview          | live update confirmed                                                 |
+| History persists across reload          | entry restored from `localStorage`                                    |
+| URL mode never fabricates a result      | real failure surfaced with fallbacks when the endpoint is unreachable |
+| iPhone 13: no horizontal overflow       | `scrollWidth == clientWidth`                                          |
+| iPhone 13: tap targets & inputs         | input 44px, button 44px, font 16px                                    |
+| iPhone 13: sample → findings → preview  | rendered, still no overflow                                           |
+
+### Cloudflare Pages (deployment scripts included)
 
 ```bash
 export CLOUDFLARE_API_TOKEN=...
 export CLOUDFLARE_ACCOUNT_ID=...
-npm run deploy:pages
+PAGES_PROJECT=metalens npm run deploy:pages   # PAGES_FUNCTION=0 for a static-only build
 ```
 
 The script builds the site at the domain root, bundles `worker/src/pages.ts` into
 `dist/_worker.js` (advanced mode) together with a `_routes.json` that scopes the
 function to `/api/*`, and uploads through the Pages direct-upload API — no
-wrangler install required. Static assets are served from the CDN; only `/api/*`
-invokes the function.
+wrangler install required.
 
-### Self-hosted fetch endpoint (optional)
+> **Status:** the upload succeeds (`deployment … deploy/success`) but the
+> resulting `*.pages.dev` host returned HTTP 500 for every path on this account,
+> including a control deployment containing a single `index.html` — so the failure
+> is platform-side, not in this code. Other projects on the same account serve 200. The mirror is therefore **not advertised** as live. See _Known limitations_.
+
+### Self-hosted fetch endpoint
 
 `worker/` contains the same handler as a standalone Cloudflare Worker:
 
@@ -242,8 +272,14 @@ npm run deploy:worker          # uploads + smoke-tests the SSRF guards
 npx wrangler deploy --config worker/wrangler.toml
 ```
 
-Then point the UI at it (either `runtime-config.json` → `fetchEndpoint`, or
-**Settings → Fetch endpoint**). Limits on the Workers free plan apply — see the
+Upload verified: `PUT /workers/scripts/metalens-fetch` → HTTP 200, and the
+worker is published at `https://metalens-fetch.<subdomain>.workers.dev/fetch`.
+`workers.dev` is DNS-blocked on the network this project was built from, so the
+end-to-end call could not be made from here; the SSRF rules are covered by
+`tests/unit/worker.test.ts` instead. Point the UI at your own endpoint via
+`runtime-config.json` → `fetchEndpoint`, or **Settings → Fetch endpoint**.
+
+Limits on the Workers free plan apply — see the
 [Cloudflare pricing page](https://developers.cloudflare.com/workers/platform/pricing/);
 MetaLens never upgrades a plan on your behalf.
 
@@ -261,19 +297,19 @@ does not pretend otherwise:
 
 The fetch endpoint is a public proxy for arbitrary URLs, so it is hardened:
 
-| Control | Implementation |
-| --- | --- |
-| Scheme | `http:` / `https:` only |
-| Credentials | URLs with `user:pass@` refused |
-| Ports | 80, 443, 8080, 8443 only |
-| Hostnames | `localhost`, `.local`, `.internal`, `.intranet`, `.lan`, `.home.arpa`, metadata names refused |
-| IP literals | private, loopback, link-local, CGNAT, multicast, reserved, IPv6 ULA/link-local/`::ffff:` mapped — all refused |
-| DNS rebinding | resolved over DNS-over-HTTPS and **every** A/AAAA answer must be public; re-resolved on every hop |
-| Redirects | followed manually, max 3, each hop re-validated |
-| Response | must be HTML/XML, capped at 1 MiB, 8s deadline |
-| Content | returned as text; never executed, never rendered server-side |
-| Rate limit | 20 requests / 60s per client IP |
-| CORS | explicit origin allowlist — never `*` |
+| Control       | Implementation                                                                                                |
+| ------------- | ------------------------------------------------------------------------------------------------------------- |
+| Scheme        | `http:` / `https:` only                                                                                       |
+| Credentials   | URLs with `user:pass@` refused                                                                                |
+| Ports         | 80, 443, 8080, 8443 only                                                                                      |
+| Hostnames     | `localhost`, `.local`, `.internal`, `.intranet`, `.lan`, `.home.arpa`, metadata names refused                 |
+| IP literals   | private, loopback, link-local, CGNAT, multicast, reserved, IPv6 ULA/link-local/`::ffff:` mapped — all refused |
+| DNS rebinding | resolved over DNS-over-HTTPS and **every** A/AAAA answer must be public; re-resolved on every hop             |
+| Redirects     | followed manually, max 3, each hop re-validated                                                               |
+| Response      | must be HTML/XML, capped at 1 MiB, 8s deadline                                                                |
+| Content       | returned as text; never executed, never rendered server-side                                                  |
+| Rate limit    | 20 requests / 60s per client IP                                                                               |
+| CORS          | explicit origin allowlist — never `*`                                                                         |
 
 Unit tests (`tests/unit/worker.test.ts`) assert each of these, including that
 `169.254.169.254`, `10.0.0.1`, `[::1]`, `metadata.google.internal` and
@@ -313,6 +349,12 @@ traffic, put Cloudflare's Rate Limiting rules or Turnstile in front of it.
 - **Vision-based verification is limited.** Layout was verified by automated DOM
   measurements (overflow, tap sizes, font sizes) and by real screenshots, not by
   human visual review.
+- **The Cloudflare Pages mirror is not live.** Uploads succeed but the resulting
+  `*.pages.dev` host answered 500 on every path for this account, including a
+  one-file control deployment, so it is not advertised. The fetch endpoint that
+  ships in `runtime-config.json` is the standalone Worker; `workers.dev` was not
+  reachable from the build network, so URL mode may report an endpoint error
+  there while still offering the paste-HTML and manual fallbacks.
 - **The score is heuristic.** Its weights are published and deliberately simple.
 
 ## Roadmap

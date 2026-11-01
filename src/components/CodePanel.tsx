@@ -56,7 +56,9 @@ export function CodePanel({
               text={code}
               label={t('code.copy')}
               copiedLabel={t('code.copied')}
-              onCopied={(ok) => onNotify(ok ? t('code.copied') : t('error.endpointError'), ok ? 'ok' : 'err')}
+              onCopied={(ok) =>
+                onNotify(ok ? t('code.copied') : t('error.endpointError'), ok ? 'ok' : 'err')
+              }
             />
           </>
         }
@@ -95,7 +97,9 @@ export function CodePanel({
           </pre>
         </div>
       ) : (
-        <p className="px-3.5 py-6 text-center text-[12.5px] text-muted sm:px-4">{t('code.empty')}</p>
+        <p className="px-3.5 py-6 text-center text-[12.5px] text-muted sm:px-4">
+          {t('code.empty')}
+        </p>
       )}
 
       {tags.length > 0 ? (
@@ -115,7 +119,10 @@ export function CodePanel({
                   title={t('code.copyOne')}
                   onClick={() => {
                     void copy(tag.tag, tag.key).then((ok) =>
-                      onNotify(ok ? t('code.copied') : t('error.endpointError'), ok ? 'ok' : 'err'),
+                      onNotify(
+                        ok ? t('code.copied') : t('error.endpointError'),
+                        ok ? 'ok' : 'err',
+                      ),
                     );
                   }}
                   className="shrink-0 rounded p-1 text-faint transition-colors hover:bg-elevated hover:text-fg"

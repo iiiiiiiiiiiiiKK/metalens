@@ -4,7 +4,17 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules', 'coverage', 'playwright-report', 'test-results', '.wrangler', 'worker/dist'] },
+  {
+    ignores: [
+      'dist',
+      'node_modules',
+      'coverage',
+      'playwright-report',
+      'test-results',
+      '.wrangler',
+      'worker/dist',
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -25,7 +35,9 @@ export default tseslint.config(
     },
   },
   {
+    // Node-side files (build, deploy and capture scripts) run outside the browser.
     files: ['scripts/**/*.mjs', '*.config.{js,ts}'],
+    languageOptions: { globals: { ...globals.node, ...globals.browser } },
     rules: { 'no-console': 'off' },
   },
 );

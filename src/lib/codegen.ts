@@ -80,7 +80,10 @@ export interface GeneratedTag {
 }
 
 /** Every tag that would be emitted, individually, for per-tag copy buttons. */
-export function generateTagList(doc: MetaDoc, opts: CodegenOptions = DEFAULT_CODEGEN_OPTIONS): GeneratedTag[] {
+export function generateTagList(
+  doc: MetaDoc,
+  opts: CodegenOptions = DEFAULT_CODEGEN_OPTIONS,
+): GeneratedTag[] {
   const out: GeneratedTag[] = [];
   for (const key of META_ORDER) {
     const field = FIELD_BY_KEY[key];
@@ -114,7 +117,9 @@ export function generateMetaTags(
 
   if (doc.lang.trim()) {
     lines.push('');
-    lines.push(`<!-- also set on the <html> element: lang="${escapeHtmlAttr(normalizeAttrValue(doc.lang))}" -->`);
+    lines.push(
+      `<!-- also set on the <html> element: lang="${escapeHtmlAttr(normalizeAttrValue(doc.lang))}" -->`,
+    );
   }
 
   return lines.join('\n');

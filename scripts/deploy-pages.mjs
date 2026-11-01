@@ -47,11 +47,16 @@ execFileSync(process.execPath, [resolve(root, 'node_modules/vite/bin/vite.js'), 
   env: { ...process.env, VITE_BASE_PATH: base },
 });
 
-console.log('building Pages Function (/api/fetch)...');
-execFileSync(process.execPath, [resolve(root, 'scripts/build-pages-function.mjs'), dist], {
-  cwd: root,
-  stdio: 'inherit',
-});
+// Set PAGES_FUNCTION=0 to publish a pure static site (no /api/fetch).
+if (process.env.PAGES_FUNCTION !== '0') {
+  console.log('building Pages Function (/api/fetch)...');
+  execFileSync(process.execPath, [resolve(root, 'scripts/build-pages-function.mjs'), dist], {
+    cwd: root,
+    stdio: 'inherit',
+  });
+} else {
+  console.log('PAGES_FUNCTION=0 -> static-only deployment');
+}
 
 // 1. Ensure the project exists.
 let created = false;
@@ -85,22 +90,59 @@ for (const file of files) {
   blobs.set(hash, { contents, path });
 }
 
-const form = new FormData();
-form.set('manifest', new Blob([JSON.stringify(manifest)], { type: 'application/json' }));
-for (const [hash, { contents, path }] of blobs) {
-  form.set(hash, new Blob([contents]), path.split('/').pop() || 'file');
+/**
+ * Cloudflare's direct-upload endpoint wants a `multipart/form-data` body whose
+ * `manifest` part is a JSON document followed by one part per unique blob. Node's
+ * FormData marks Blob parts as file uploads, which the API rejects, so the body
+ * is assembled by hand.
+ */
+function buildMultipart(parts) {
+  const boundary = `----metalens${Date.now().toString(16)}`;
+  const chunks = [];
+  for (const part of parts) {
+    let head = `--${boundary}\r\nContent-Disposition: form-data; name="${part.name}"`;
+    if (part.filename) head += `; filename="${part.filename}"`;
+    head += '\r\n';
+    if (part.type) head += `Content-Type: ${part.type}\r\n`;
+    head += '\r\n';
+    chunks.push(Buffer.from(head, 'utf8'), Buffer.from(part.data), Buffer.from('\r\n'));
+  }
+  chunks.push(Buffer.from(`--${boundary}--\r\n`));
+  return {
+    body: Buffer.concat(chunks),
+    contentType: `multipart/form-data; boundary=${boundary}`,
+  };
 }
+
+// The manifest must be a plain form field (no filename), exactly as wrangler
+// sends it; a file part is rejected with 8000096.
+const parts = [
+  {
+    name: 'manifest',
+    type: 'application/json',
+    data: JSON.stringify(manifest),
+  },
+];
+for (const [hash, { contents }] of blobs) {
+  parts.push({ name: hash, filename: hash, type: 'application/octet-stream', data: contents });
+}
+
+const { body, contentType } = buildMultipart(parts);
 
 console.log(`uploading ${files.length} files (${blobs.size} unique blobs)...`);
 const deployRes = await fetch(`${api}/${project}/deployments`, {
   method: 'POST',
-  headers: auth,
-  body: form,
+  headers: { ...auth, 'Content-Type': contentType },
+  body,
 });
 const deployJson = await deployRes.json().catch(() => ({}));
 
 if (!deployRes.ok || deployJson.success === false) {
-  console.error('deploy failed:', deployRes.status, JSON.stringify(deployJson.errors ?? deployJson));
+  console.error(
+    'deploy failed:',
+    deployRes.status,
+    JSON.stringify(deployJson.errors ?? deployJson),
+  );
   process.exit(1);
 }
 

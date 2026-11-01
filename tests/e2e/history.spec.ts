@@ -37,7 +37,10 @@ test('a single entry can be deleted', async ({ page }) => {
   const list = page.getByTestId('history-list');
   await expect(list.getByRole('listitem')).toHaveCount(1);
 
-  await list.getByRole('button', { name: /remove from history/i }).first().click();
+  await list
+    .getByRole('button', { name: /remove from history/i })
+    .first()
+    .click();
   await expect(list).toHaveCount(0);
 });
 
@@ -53,7 +56,10 @@ test('clearing history asks for confirmation first', async ({ page }) => {
   await expect(page.getByTestId('history-list').getByRole('listitem')).toHaveCount(1);
 
   await page.getByRole('button', { name: /clear/i }).last().click();
-  await page.getByRole('dialog').getByRole('button', { name: /delete/i }).click();
+  await page
+    .getByRole('dialog')
+    .getByRole('button', { name: /delete/i })
+    .click();
   await expect(page.getByTestId('history-list')).toHaveCount(0);
 });
 

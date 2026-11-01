@@ -1,4 +1,4 @@
-﻿import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 4380;
 const BASE_URL = `http://127.0.0.1:${PORT}`;
@@ -35,7 +35,10 @@ export default defineConfig({
       name: 'iphone-se',
       use: {
         ...devices['iPhone SE'],
-        // 320px-class viewport, the narrowest realistic iPhone width.
+        // 320px is the narrowest realistic iPhone width. Layout at this size is
+        // engine-independent CSS, so this profile runs on Chromium (which is
+        // stable in CI); WebKit rendering is covered by the iphone-13 project.
+        browserName: 'chromium',
         viewport: { width: 320, height: 568 },
         locale: 'en-US',
       },

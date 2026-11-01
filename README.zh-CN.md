@@ -10,10 +10,9 @@
 [![CI](https://github.com/iiiiiiiiiiiiiKK/metalens/actions/workflows/ci.yml/badge.svg)](https://github.com/iiiiiiiiiiiiiKK/metalens/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Live on GitHub Pages](https://img.shields.io/badge/live-GitHub%20Pages-222.svg)](https://iiiiiiiiiiiiiKK.github.io/metalens/)
-[![Mirror on Cloudflare Pages](https://img.shields.io/badge/mirror-Cloudflare%20Pages-f38020.svg)](https://metalens.pages.dev/)
+[![Tests](https://img.shields.io/badge/tests-208%20unit%20%C2%B7%2090%20e2e-brightgreen.svg)](#测试)
 
 [在线体验](https://iiiiiiiiiiiiiKK.github.io/metalens/) ·
-[镜像站点](https://metalens.pages.dev/) ·
 [作者 X](https://x.com/0xkillcoin) ·
 [English](README.md)
 
@@ -40,40 +39,41 @@ MetaLens 把这条闭环补上：
 
 ## 功能
 
-| 模块 | 说明 |
-| --- | --- |
-| **两种输入模式** | 粘贴 HTML（始终可用，本地解析）或输入 URL（走 CORS 直连，或使用可选的自建抓取服务）。 |
-| **完整字段提取** | `<title>`、描述、canonical、`lang`、`robots`、`viewport`、favicon、全部 Open Graph 字段、全部 X Card 字段，以及所有未建模的标签（原样列出，保持透明）。 |
-| **诊断而非只有一个分数** | 缺失、为空、重复、格式错误；相对/非法 URL；canonical 不一致；长度建议；未知卡片类型。每条都带实际取值和具体修复建议。 |
-| **四平台预览** | X（大图 / 小图 / 无图）、Facebook、LinkedIn、微信风格卡片，各自套用该平台公开的回退顺序。 |
-| **实时编辑器** | 可改标题、描述、canonical、语言以及全部 OG / X 字段；预览与生成代码随输入更新，一键恢复原始值。 |
-| **图片检查** | 真实加载 `og:image` / `twitter:image` 并读取像素尺寸。图片加载不了就标为「无法验证」，绝不编造尺寸。支持上传本地图片预览（不会上传）。 |
-| **代码生成** | 顺序固定、HTML 转义的 `<meta>` 输出，支持单条复制、分组开关、下载 `.html`。 |
-| **报告导出** | 一键导出 Markdown 或 JSON：问题清单、健康度明细、生成代码。 |
-| **历史记录** | 最近 25 次检查，仅存在 `localStorage`，可单条删除、可确认后清空。 |
-| **中英双语 + 主题** | 中文 / English 与深色 / 浅色，均会记忆。切换语言不影响已检查的数据。 |
-| **移动端优先** | 手机端单列布局、平台预览可横向切换、44px 触控目标、16px 输入框（避免 iOS 自动放大）、安全区适配，并保证页面级绝不横向溢出。 |
+| 模块                     | 说明                                                                                                                                                    |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **两种输入模式**         | 粘贴 HTML（始终可用，本地解析）或输入 URL（走 CORS 直连，或使用可选的自建抓取服务）。                                                                   |
+| **完整字段提取**         | `<title>`、描述、canonical、`lang`、`robots`、`viewport`、favicon、全部 Open Graph 字段、全部 X Card 字段，以及所有未建模的标签（原样列出，保持透明）。 |
+| **诊断而非只有一个分数** | 缺失、为空、重复、格式错误；相对/非法 URL；canonical 不一致；长度建议；未知卡片类型。每条都带实际取值和具体修复建议。                                   |
+| **四平台预览**           | X（大图 / 小图 / 无图）、Facebook、LinkedIn、微信风格卡片，各自套用该平台公开的回退顺序。                                                               |
+| **实时编辑器**           | 可改标题、描述、canonical、语言以及全部 OG / X 字段；预览与生成代码随输入更新，一键恢复原始值。                                                         |
+| **图片检查**             | 真实加载 `og:image` / `twitter:image` 并读取像素尺寸。图片加载不了就标为「无法验证」，绝不编造尺寸。支持上传本地图片预览（不会上传）。                  |
+| **代码生成**             | 顺序固定、HTML 转义的 `<meta>` 输出，支持单条复制、分组开关、下载 `.html`。                                                                             |
+| **报告导出**             | 一键导出 Markdown 或 JSON：问题清单、健康度明细、生成代码。                                                                                             |
+| **历史记录**             | 最近 25 次检查，仅存在 `localStorage`，可单条删除、可确认后清空。                                                                                       |
+| **中英双语 + 主题**      | 中文 / English 与深色 / 浅色，均会记忆。切换语言不影响已检查的数据。                                                                                    |
+| **移动端优先**           | 手机端单列布局、平台预览可横向切换、44px 触控目标、16px 输入框（避免 iOS 自动放大）、安全区适配，并保证页面级绝不横向溢出。                             |
 
 ## 截图
 
-| 检查结果 | 生成的 Meta 代码 |
-| --- | --- |
+| 检查结果                                           | 生成的 Meta 代码                           |
+| -------------------------------------------------- | ------------------------------------------ |
 | ![检查结果](docs/screenshots/desktop-findings.png) | ![代码](docs/screenshots/desktop-code.png) |
 
-| iPhone — 预览 | iPhone — 检查结果 |
-| --- | --- |
+| iPhone — 预览                                      | iPhone — 检查结果                                   |
+| -------------------------------------------------- | --------------------------------------------------- |
 | ![移动端预览](docs/screenshots/mobile-preview.png) | ![移动端检查](docs/screenshots/mobile-findings.png) |
 
-所有截图都由 `scripts/capture-screenshots.mjs` 从真实构建中抓取
-（Chromium 1440×900 @2x，以及 WebKit 的 iPhone 13 描述符），不是效果图。
+所有截图都由 `scripts/capture-screenshots.mjs` 从真实部署中抓取（Chromium 1440×900 @2x，
+手机截图为 Chromium 的 iPhone 13 设备描述符；WebKit 下的 iPhone 布局另由 `iphone-13`
+Playwright 项目验证），不是效果图。
 
 ## 十秒上手
 
 1. 打开[在线站点](https://iiiiiiiiiiiiiKK.github.io/metalens/)。
 2. 点击 **示例 → 标签完整的页面**。内置三份演示文档，均明确标注为演示数据：
-   - *标签完整的页面* —— 没有问题的正例。
-   - *只有经典标签* —— 没有 Open Graph、没有 X Cards。
-   - *真实的混乱页面* —— 重复标题、相对图片路径、`noindex`、非法卡片类型、过长文案。
+   - _标签完整的页面_ —— 没有问题的正例。
+   - _只有经典标签_ —— 没有 Open Graph、没有 X Cards。
+   - _真实的混乱页面_ —— 重复标题、相对图片路径、`noindex`、非法卡片类型、过长文案。
 3. 在 X / Facebook / LinkedIn / 微信之间切换预览。
 4. 在编辑器里改一下 `og:title`，观察卡片和代码同步变化。
 
@@ -103,12 +103,12 @@ MetaLens 把这条闭环补上：
 
 ### 检查哪些字段
 
-| 分组 | 字段 |
-| --- | --- |
-| 基础信息 | `title`、`description`、`canonical`、`lang`、`robots`、`viewport`、favicon |
+| 分组       | 字段                                                                                                       |
+| ---------- | ---------------------------------------------------------------------------------------------------------- |
+| 基础信息   | `title`、`description`、`canonical`、`lang`、`robots`、`viewport`、favicon                                 |
 | Open Graph | `og:title`、`og:description`、`og:image`、`og:image:alt`、`og:url`、`og:type`、`og:site_name`、`og:locale` |
-| X Cards | `twitter:card`、`twitter:title`、`twitter:description`、`twitter:image`、`twitter:site`、`twitter:creator` |
-| 图片检查 | 绝对地址校验、真实尺寸、宽高比；加载不到时明确显示「无法验证」 |
+| X Cards    | `twitter:card`、`twitter:title`、`twitter:description`、`twitter:image`、`twitter:site`、`twitter:creator` |
+| 图片检查   | 绝对地址校验、真实尺寸、宽高比；加载不到时明确显示「无法验证」                                             |
 
 每个字段都会给出实际值、四种状态之一（**正常 / 缺失 / 警告 / 无法验证**）、具体问题与修改建议。
 
@@ -138,28 +138,28 @@ npm run dev        # http://127.0.0.1:5173
 
 要求：Node.js ≥ 20.19。不需要任何环境变量。
 
-| 命令 | 作用 |
-| --- | --- |
-| `npm run dev` | Vite 开发服务器 |
-| `npm run build` | 类型检查 + 生产构建（输出到 `dist/`） |
-| `npm run preview` | 预览生产构建 |
-| `npm run typecheck` | `tsc --noEmit` |
-| `npm run lint` | ESLint（flat config，typescript-eslint + react-hooks） |
-| `npm run format` | Prettier 检查（`format:write` 自动修复） |
-| `npm test` | Vitest 单元测试 |
-| `npm run test:e2e` | Playwright：桌面 Chromium + iPhone 13（WebKit）+ iPhone SE 320px |
-| `npm run worker:build` | 打包抓取服务 |
+| 命令                   | 作用                                                             |
+| ---------------------- | ---------------------------------------------------------------- |
+| `npm run dev`          | Vite 开发服务器                                                  |
+| `npm run build`        | 类型检查 + 生产构建（输出到 `dist/`）                            |
+| `npm run preview`      | 预览生产构建                                                     |
+| `npm run typecheck`    | `tsc --noEmit`                                                   |
+| `npm run lint`         | ESLint（flat config，typescript-eslint + react-hooks）           |
+| `npm run format`       | Prettier 检查（`format:write` 自动修复）                         |
+| `npm test`             | Vitest 单元测试                                                  |
+| `npm run test:e2e`     | Playwright：桌面 Chromium + iPhone 13（WebKit）+ iPhone SE 320px |
+| `npm run worker:build` | 打包抓取服务                                                     |
 
 ### 环境变量
 
 见 [`.env.example`](.env.example)。应用本身不需要任何变量，它们只影响构建与部署。
 
-| 名称 | 用途 | 说明 |
-| --- | --- | --- |
-| `VITE_BASE_PATH` | 构建 | 根域名用 `/`，GitHub Pages 项目页用 `/metalens/`。 |
-| `VITE_FETCH_ENDPOINT` | 可选 | 写入 `public/runtime-config.json` 的默认抓取服务地址，也可在应用内「设置」里改。 |
-| `CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID` | 部署脚本 | Cloudflare 上传凭据，绝不提交。 |
-| `PAGES_PROJECT` | `npm run deploy:pages` | Cloudflare Pages 项目名（默认 `metalens`）。 |
+| 名称                                            | 用途                   | 说明                                                                             |
+| ----------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------- |
+| `VITE_BASE_PATH`                                | 构建                   | 根域名用 `/`，GitHub Pages 项目页用 `/metalens/`。                               |
+| `VITE_FETCH_ENDPOINT`                           | 可选                   | 写入 `public/runtime-config.json` 的默认抓取服务地址，也可在应用内「设置」里改。 |
+| `CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID` | 部署脚本               | Cloudflare 上传凭据，绝不提交。                                                  |
+| `PAGES_PROJECT`                                 | `npm run deploy:pages` | Cloudflare Pages 项目名（默认 `metalens`）。                                     |
 
 ## 测试
 
@@ -184,29 +184,57 @@ CORS 失败时的诚实提示与替代方案、编辑器实时更新预览、平
 
 ## 部署
 
-### GitHub Pages（主站）
+### GitHub Pages（已上线）
 
-在线地址：**https://iiiiiiiiiiiiiKK.github.io/metalens/**
+**https://iiiiiiiiiiiiiKK.github.io/metalens/** —— 这是基准部署，已做过端到端验证（见下）。
 
 `.github/workflows/deploy.yml` 以 `VITE_BASE_PATH=/metalens/` 构建，并在每次推送到 `main`
 时把 `dist/` 发布到 `gh-pages` 分支。首次启用：**Settings → Pages → Build and deployment →
 Deploy from a branch → `gh-pages` / root**。
 
-### Cloudflare Pages（镜像 + 抓取 API）
+### 线上验证结果
 
-在线地址：**https://metalens.pages.dev/** —— 抓取 API：**`/api/fetch`**
+`scripts/verify-production.mjs` 会用真实浏览器打开部署地址逐项检查：
+
+```bash
+node scripts/verify-production.mjs --url=https://iiiiiiiiiiiiiKK.github.io/metalens/
+```
+
+最近一次运行 **13/13 通过**：
+
+| 检查项                       | 结果                                                              |
+| ---------------------------- | ----------------------------------------------------------------- |
+| 页面返回 200 且应用外壳正常  | status 200                                                        |
+| 文档携带 CSP                 | 存在 `default-src 'self'`                                         |
+| 顶部作者 𝕏 链接              | `href`、`target="_blank"`、`rel="noopener"`，且位于粘性顶部区域内 |
+| 运行时配置加载抓取服务地址   | 从 `runtime-config.json` 读到地址                                 |
+| 粘贴 HTML → 问题/健康度/代码 | 评分正常，生成转义后的 `<meta>`                                   |
+| `og:image` 真实探测          | 从部署资源量到真实 `1200×630`                                     |
+| 平台预览切换                 | X / Facebook / LinkedIn / 微信 均可渲染                           |
+| 编辑器改动同步到预览         | 实时更新已确认                                                    |
+| 刷新后历史仍在               | 从 `localStorage` 恢复                                            |
+| 链接模式不伪造结果           | 端点不可达时如实报错并给出替代方案                                |
+| iPhone 13 无横向溢出         | `scrollWidth == clientWidth`                                      |
+| iPhone 13 触控与输入框       | 输入框 44px、按钮 44px、字号 16px                                 |
+| iPhone 13 示例 → 结果 → 预览 | 正常渲染，且仍无溢出                                              |
+
+### Cloudflare Pages（已提供部署脚本）
 
 ```bash
 export CLOUDFLARE_API_TOKEN=...
 export CLOUDFLARE_ACCOUNT_ID=...
-npm run deploy:pages
+PAGES_PROJECT=metalens npm run deploy:pages   # 加 PAGES_FUNCTION=0 只发静态站
 ```
 
 脚本会在根路径构建站点，把 `worker/src/pages.ts` 打成 `dist/_worker.js`（advanced mode），
 并生成只把 `/api/*` 交给函数的 `_routes.json`，然后通过 Pages 直传 API 上传——无需安装 wrangler。
-静态资源直接由 CDN 提供，只有 `/api/*` 会触发函数。
 
-### 自建抓取服务（可选）
+> **状态：** 上传本身成功（`deployment … deploy/success`），但本账号上新建项目得到的
+> `*.pages.dev` 域名对所有路径都返回 HTTP 500，连只含一个 `index.html` 的对照部署也是如此，
+> 因此问题在平台侧而非本仓库代码；同一账号下其它项目返回 200。所以该镜像**不会**作为线上地址对外宣传。
+> 详见「已知限制」。
+
+### 自建抓取服务
 
 `worker/` 里是同一份处理逻辑的独立 Cloudflare Worker 版本：
 
@@ -217,7 +245,11 @@ npm run deploy:worker          # 上传并自动做一次 SSRF 冒烟测试
 npx wrangler deploy --config worker/wrangler.toml
 ```
 
-然后在 `runtime-config.json` 的 `fetchEndpoint` 或应用内 **设置 → 抓取服务** 里填入地址。
+上传已验证：`PUT /workers/scripts/metalens-fetch` 返回 HTTP 200，服务发布于
+`https://metalens-fetch.<subdomain>.workers.dev/fetch`。由于构建所在网络的 `workers.dev`
+被 DNS 污染，无法在此做端到端调用；SSRF 规则由 `tests/unit/worker.test.ts` 覆盖。
+你可以在 `runtime-config.json` 的 `fetchEndpoint` 或应用内 **设置 → 抓取服务** 里换成自己的地址。
+
 Workers 免费套餐的额度限制适用，参见
 [Cloudflare 定价页](https://developers.cloudflare.com/workers/platform/pricing/)；
 MetaLens 不会替你升级任何付费套餐。
@@ -233,19 +265,19 @@ MetaLens 不会替你升级任何付费套餐。
 
 抓取服务本质上是「任意 URL 代理」，因此做了完整加固：
 
-| 控制项 | 实现 |
-| --- | --- |
-| 协议 | 仅 `http:` / `https:` |
-| 凭据 | 拒绝 `user:pass@` 形式的 URL |
-| 端口 | 仅 80、443、8080、8443 |
-| 主机名 | 拒绝 `localhost`、`.local`、`.internal`、`.intranet`、`.lan`、`.home.arpa`、云元数据域名 |
-| IP 字面量 | 私有、环回、链路本地、CGNAT、组播、保留地址，以及 IPv6 ULA / 链路本地 / `::ffff:` 映射，全部拒绝 |
-| DNS 重绑定 | 通过 DoH 解析，**所有** A/AAAA 结果都必须是公网地址；每一跳都重新解析校验 |
-| 重定向 | 手动跟随，最多 3 跳，逐跳重新校验 |
-| 响应 | 必须是 HTML/XML，上限 1 MiB，总时限 8 秒 |
-| 内容 | 仅以文本返回，绝不执行、绝不在服务端渲染 |
-| 限流 | 每客户端 IP 每 60 秒 20 次 |
-| CORS | 明确的来源白名单，绝不使用 `*` |
+| 控制项     | 实现                                                                                             |
+| ---------- | ------------------------------------------------------------------------------------------------ |
+| 协议       | 仅 `http:` / `https:`                                                                            |
+| 凭据       | 拒绝 `user:pass@` 形式的 URL                                                                     |
+| 端口       | 仅 80、443、8080、8443                                                                           |
+| 主机名     | 拒绝 `localhost`、`.local`、`.internal`、`.intranet`、`.lan`、`.home.arpa`、云元数据域名         |
+| IP 字面量  | 私有、环回、链路本地、CGNAT、组播、保留地址，以及 IPv6 ULA / 链路本地 / `::ffff:` 映射，全部拒绝 |
+| DNS 重绑定 | 通过 DoH 解析，**所有** A/AAAA 结果都必须是公网地址；每一跳都重新解析校验                        |
+| 重定向     | 手动跟随，最多 3 跳，逐跳重新校验                                                                |
+| 响应       | 必须是 HTML/XML，上限 1 MiB，总时限 8 秒                                                         |
+| 内容       | 仅以文本返回，绝不执行、绝不在服务端渲染                                                         |
+| 限流       | 每客户端 IP 每 60 秒 20 次                                                                       |
+| CORS       | 明确的来源白名单，绝不使用 `*`                                                                   |
 
 `tests/unit/worker.test.ts` 对以上每一条都有断言，包括 `169.254.169.254`、`10.0.0.1`、
 `[::1]`、`metadata.google.internal`、`file:///etc/passwd` 都在发起任何网络请求之前被拒绝。
@@ -273,6 +305,10 @@ MetaLens 不会替你升级任何付费套餐。
   Cloudflare 上的抓取端点来处理不发送 CORS 头的站点。
 - **视觉验证方式有限。** 布局通过自动化的 DOM 度量（溢出、触控尺寸、字号）与真实截图验证，
   没有经过人眼逐像素审阅。
+- **Cloudflare Pages 镜像未上线。** 上传成功，但本账号新建项目得到的 `*.pages.dev` 对所有路径
+  返回 500，连单文件对照部署也一样，因此不作为线上地址对外宣传。`runtime-config.json` 里配置的
+  抓取端点来自独立 Worker；构建网络无法解析 `workers.dev`，所以在该网络下链接模式可能提示端点错误，
+  但仍会给出粘贴 HTML 与手动填写两条替代路径。
 - **评分是启发式的。** 权重已公开，且刻意保持简单。
 
 ## 后续计划

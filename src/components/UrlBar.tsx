@@ -1,4 +1,4 @@
-﻿import { useMemo } from 'react';
+import { useMemo } from 'react';
 import {
   AlertTriangle,
   ArrowRight,
@@ -53,7 +53,11 @@ export function UrlBar({
     () => [
       { value: 'url' as const, label: t('input.tab.url'), icon: <Link2 size={13} /> },
       { value: 'html' as const, label: t('input.tab.html'), icon: <FileCode2 size={13} /> },
-      { value: 'manual' as const, label: t('input.tab.manual'), icon: <PencilLine size={13} /> },
+      {
+        value: 'manual' as const,
+        label: t('input.tab.manual'),
+        icon: <PencilLine size={13} />,
+      },
       { value: 'sample' as const, label: t('input.tab.sample'), icon: <Sparkles size={13} /> },
     ],
     [t],
@@ -222,7 +226,9 @@ function ErrorBlock({
         <AlertTriangle size={15} className="mt-0.5 shrink-0 text-err" />
         <div className="min-w-0 flex-1">
           <p className="text-[13px] font-semibold text-fg">{t('error.title')}</p>
-          <p className="mt-0.5 break-words text-[12.5px] leading-relaxed text-muted">{message}</p>
+          <p className="mt-0.5 break-words text-[12.5px] leading-relaxed text-muted">
+            {message}
+          </p>
           <p className="mt-2 text-[11px] font-semibold uppercase tracking-wide text-faint">
             {t('error.whatNow')}
           </p>

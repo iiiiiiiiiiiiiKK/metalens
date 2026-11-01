@@ -11,8 +11,7 @@ type Size = 'sm' | 'md' | 'icon';
 const VARIANTS: Record<Variant, string> = {
   primary:
     'bg-accent text-white hover:brightness-110 active:brightness-95 border border-transparent shadow-sm',
-  secondary:
-    'bg-elevated text-fg hover:bg-line border border-line hover:border-line-strong',
+  secondary: 'bg-elevated text-fg hover:bg-line border border-line hover:border-line-strong',
   ghost: 'bg-transparent text-muted hover:text-fg hover:bg-elevated border border-transparent',
   danger: 'bg-transparent text-err hover:bg-err/10 border border-transparent',
 };
@@ -77,7 +76,9 @@ export function StatusDot({ status, className = '' }: { status: Status; classNam
         : status === 'warning'
           ? 'bg-warn'
           : 'bg-unknown';
-  return <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${color} ${className}`} aria-hidden />;
+  return (
+    <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${color} ${className}`} aria-hidden />
+  );
 }
 
 /* -------------------------------------------------------------------- card -- */
@@ -117,7 +118,9 @@ export function PanelHeader({
         <h2 id={id} className="text-[13px] font-semibold tracking-tight text-fg">
           {title}
         </h2>
-        {subtitle ? <p className="mt-0.5 text-[11.5px] leading-snug text-muted">{subtitle}</p> : null}
+        {subtitle ? (
+          <p className="mt-0.5 text-[11.5px] leading-snug text-muted">{subtitle}</p>
+        ) : null}
       </div>
       {right ? <div className="flex shrink-0 items-center gap-1.5">{right}</div> : null}
     </div>
@@ -191,9 +194,7 @@ export function Toast({ message, tone = 'ok' }: { message: string; tone?: 'ok' |
       role="status"
       aria-live="polite"
       className={`pointer-events-none fixed inset-x-0 bottom-5 z-[60] mx-auto flex w-fit max-w-[calc(100vw-2rem)] items-center gap-2 rounded-full border px-3.5 py-2 text-[12.5px] font-medium shadow-lg backdrop-blur ${
-        tone === 'ok'
-          ? 'border-ok/30 bg-ok/15 text-ok'
-          : 'border-err/30 bg-err/15 text-err'
+        tone === 'ok' ? 'border-ok/30 bg-ok/15 text-ok' : 'border-err/30 bg-err/15 text-err'
       }`}
     >
       {tone === 'ok' ? <Check size={14} /> : <XIcon size={14} />}
@@ -250,9 +251,12 @@ export function useCopy(onResult?: (ok: boolean) => void) {
     [onResult],
   );
 
-  useEffect(() => () => {
-    if (timer.current) window.clearTimeout(timer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (timer.current) window.clearTimeout(timer.current);
+    },
+    [],
+  );
 
   return { copy, copied };
 }
@@ -342,12 +346,22 @@ export function Segmented<T extends string>({
 
 /* ------------------------------------------------------------------ misc -- */
 
-export function Empty({ icon, title, children }: { icon?: ReactNode; title: string; children?: ReactNode }) {
+export function Empty({
+  icon,
+  title,
+  children,
+}: {
+  icon?: ReactNode;
+  title: string;
+  children?: ReactNode;
+}) {
   return (
     <div className="flex flex-col items-center gap-1.5 px-4 py-8 text-center">
       {icon ? <div className="mb-1 text-faint">{icon}</div> : null}
       <p className="text-[13px] font-medium text-fg">{title}</p>
-      {children ? <p className="max-w-sm text-[12px] leading-relaxed text-muted">{children}</p> : null}
+      {children ? (
+        <p className="max-w-sm text-[12px] leading-relaxed text-muted">{children}</p>
+      ) : null}
     </div>
   );
 }

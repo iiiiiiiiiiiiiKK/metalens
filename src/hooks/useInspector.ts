@@ -57,7 +57,10 @@ function initialLocale(): Locale {
 function initialTheme(): Theme {
   const stored = readString(THEME_KEY);
   if (stored === 'dark' || stored === 'light') return stored;
-  if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: light)').matches) {
+  if (
+    typeof window !== 'undefined' &&
+    window.matchMedia?.('(prefers-color-scheme: light)').matches
+  ) {
     return 'light';
   }
   return 'dark';
@@ -223,7 +226,10 @@ export function useInspector() {
     (html?: string, sourceUrl = '') => {
       const value = html ?? htmlInput;
       const parsed = parseHtml(value, { sourceUrl, mode: 'html' });
-      commit(parsed, sourceUrl || parsed.doc.canonical || parsed.doc.og.url || 'about:html-input');
+      commit(
+        parsed,
+        sourceUrl || parsed.doc.canonical || parsed.doc.og.url || 'about:html-input',
+      );
     },
     [commit, htmlInput],
   );
@@ -291,13 +297,10 @@ export function useInspector() {
 
   /* -------------------------------------------------------------- settings -- */
 
-  const updateEndpoint = useCallback(
-    (endpoint: string) => {
-      saveFetchEndpoint(endpoint);
-      setConfig((prev) => ({ ...prev, fetchEndpoint: endpoint.trim() }));
-    },
-    [],
-  );
+  const updateEndpoint = useCallback((endpoint: string) => {
+    saveFetchEndpoint(endpoint);
+    setConfig((prev) => ({ ...prev, fetchEndpoint: endpoint.trim() }));
+  }, []);
 
   /* --------------------------------------------------------------- derived -- */
 

@@ -67,7 +67,11 @@ async function readLimited(
   }
 }
 
-function withTimeout(ms: number): { signal: AbortSignal; done: () => void; timedOut: () => boolean } {
+function withTimeout(ms: number): {
+  signal: AbortSignal;
+  done: () => void;
+  timedOut: () => boolean;
+} {
   const controller = new AbortController();
   let timedOut = false;
   const timer = setTimeout(() => {

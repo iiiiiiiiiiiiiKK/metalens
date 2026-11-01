@@ -6,8 +6,7 @@ const zh: Record<string, string> = {
   'app.description':
     '检查标题、描述、Open Graph 与 X Card 标签，并预览 X、Facebook、LinkedIn、微信的分享卡片。',
   'app.privacy': '所有解析都在你的浏览器本地完成，没有任何上传。',
-  'app.disclaimer':
-    '这是基于 Meta 标签的模拟预览，无法复现各平台内部的排序、缓存与截断规则。',
+  'app.disclaimer': '这是基于 Meta 标签的模拟预览，无法复现各平台内部的排序、缓存与截断规则。',
 
   // --------------------------------------------------------------- header --
   'header.author': '作者 X 主页',
@@ -40,8 +39,7 @@ const zh: Record<string, string> = {
 
   // --------------------------------------------------------------- errors --
   'error.invalidUrl': '这不是一个有效的 http(s) 链接。',
-  'error.cors':
-    '浏览器拦截了请求（几乎都是 CORS 限制——目标站点不允许其它来源读取它的 HTML）。',
+  'error.cors': '浏览器拦截了请求（几乎都是 CORS 限制——目标站点不允许其它来源读取它的 HTML）。',
   'error.blocked': '抓取服务拒绝了该目标（本地、内网或保留地址）。',
   'error.httpError': '服务器返回了错误状态：{detail}。',
   'error.notHtml': '该链接没有返回 HTML 文档（{detail}）。',
@@ -110,7 +108,8 @@ const zh: Record<string, string> = {
   'issue.title.missing': '缺少 <title> 元素。',
   'issue.title.empty': '<title> 元素为空。',
   'issue.title.short': '<title> 只有 {len} 个字符（建议至少 {min} 个）。',
-  'issue.title.long': '<title> 有 {len} 个字符，多数展示位会在 {max}–{hardMax} 附近截断（仅供参考）。',
+  'issue.title.long':
+    '<title> 有 {len} 个字符，多数展示位会在 {max}–{hardMax} 附近截断（仅供参考）。',
   'issue.title.ok': '<title> 长度 {len}，可用。',
   'issue.title.duplicate': '发现 {count} 个 <title> 元素，抓取方可能取到错误的那一个。',
   'issue.description.missing': '缺少 meta description。',
@@ -159,17 +158,21 @@ const zh: Record<string, string> = {
   'issue.image.unreachable':
     '{field} 无法加载（{reason}）。可能是文件不存在、防盗链或跨域限制，因此尺寸未知。',
   'issue.image.tooSmall': '{field} 只有 {w}×{h}，大图卡片会显得模糊。',
-  'issue.image.aspect': '{field} 的宽高比为 {ratio}:1，接近 1.91:1 才能不被裁切地填满大图卡片。',
+  'issue.image.aspect':
+    '{field} 的宽高比为 {ratio}:1，接近 1.91:1 才能不被裁切地填满大图卡片。',
 
   // ------------------------------------------------------------------ fix --
   'fix.field.title': '写一个唯一、有描述性的标题，把最关键的词放在前面。',
-  'fix.field.description': '用 50–160 个字符说明读者能得到什么，把它当广告文案而不是关键词堆砌。',
+  'fix.field.description':
+    '用 50–160 个字符说明读者能得到什么，把它当广告文案而不是关键词堆砌。',
   'fix.field.canonical': '让 canonical 指向你希望用于分享卡片和搜索结果的唯一 URL。',
   'fix.field.lang': '在 <html> 上声明语言，例如 lang="zh-CN" 或 lang="en"。',
   'fix.field.robots': '只有当该页面确实不该出现在搜索结果里时才使用 noindex。',
-  'fix.field.viewport': '添加 <meta name="viewport" content="width=device-width, initial-scale=1" />。',
+  'fix.field.viewport':
+    '添加 <meta name="viewport" content="width=device-width, initial-scale=1" />。',
   'fix.field.favicon': '用绝对地址引用一个方形图标（至少 96×96，SVG 或 PNG）。',
-  'fix.field.og:title': '添加 og:title——X、Facebook、LinkedIn 都用它作为卡片标题；缺失时会退回 <title>。',
+  'fix.field.og:title':
+    '添加 og:title——X、Facebook、LinkedIn 都用它作为卡片标题；缺失时会退回 <title>。',
   'fix.field.og:description': '添加 og:description——它决定标题下方那两三行文字。',
   'fix.field.og:image':
     '添加 og:image，指向绝对地址的 1200×630（1.91:1）JPEG 或 PNG，否则卡片将没有配图。',
@@ -182,7 +185,8 @@ const zh: Record<string, string> = {
     '把 twitter:card 设为 summary_large_image（大图）或 summary（小方图）。',
   'fix.field.twitter:title': '可选——X 会依次回退到 og:title、<title>。',
   'fix.field.twitter:description': '可选——X 会依次回退到 og:description、meta description。',
-  'fix.field.twitter:image': '添加 twitter:image（或依赖 og:image），使用绝对地址的 1.91:1 图片。',
+  'fix.field.twitter:image':
+    '添加 twitter:image（或依赖 og:image），使用绝对地址的 1.91:1 图片。',
   'fix.field.twitter:site': '添加 twitter:site 填写你的 @账号，卡片会标注来源账号。',
   'fix.field.twitter:creator': '添加 twitter:creator 填写作者 @账号。',
 

@@ -1,9 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  escapeHtmlAttr,
-  escapeHtmlText,
-  normalizeAttrValue,
-} from '../../src/lib/escape';
+import { escapeHtmlAttr, escapeHtmlText, normalizeAttrValue } from '../../src/lib/escape';
 
 describe('escapeHtmlAttr', () => {
   it('escapes every character that can break an attribute', () => {

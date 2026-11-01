@@ -19,8 +19,9 @@ const HTML = `<!doctype html>
 </html>`;
 
 test.beforeEach(async ({ page }) => {
-  await page.route(/^https:\/\/(?!127\.0\.0\.1|localhost).*\.(png|jpg|jpeg|gif|webp)(\?.*)?$/i, (route) =>
-    route.abort(),
+  await page.route(
+    /^https:\/\/(?!127\.0\.0\.1|localhost).*\.(png|jpg|jpeg|gif|webp)(\?.*)?$/i,
+    (route) => route.abort(),
   );
   await page.goto('/');
   await page.getByRole('tab', { name: /paste html/i }).click();

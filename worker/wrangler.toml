@@ -1,0 +1,18 @@
+# Cloudflare Worker configuration — optional path for deploying the fetch
+# endpoint with wrangler instead of `npm run deploy:worker`.
+#
+#   npx wrangler deploy --config worker/wrangler.toml
+#
+name = "metalens-fetch"
+main = "dist/index.js"
+compatibility_date = "2025-09-01"
+
+[vars]
+# Comma separated browser origins allowed to call this endpoint.
+ALLOWED_ORIGINS = "https://iiiiiiiiiiiiiKK.github.io,https://metalens.pages.dev,http://localhost:5173,http://127.0.0.1:5173,http://localhost:4173,http://127.0.0.1:4173"
+RATE_LIMIT = "20"
+RATE_WINDOW = "60"
+MAX_BYTES = "1048576"
+
+[observability]
+enabled = true

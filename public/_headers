@@ -1,0 +1,13 @@
+# Cloudflare Pages / Netlify style headers (ignored by GitHub Pages).
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; connect-src 'self' https:; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/runtime-config.json
+  Cache-Control: no-cache
